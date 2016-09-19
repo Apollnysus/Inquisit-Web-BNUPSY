@@ -1,0 +1,4 @@
+date	time	group	subject	build	blocknum	trialnum	blockcode	trialcode	pretrialpause	posttrialpause	windowcenter	trialduration	trialtimeout	blocktimeout	response	correct	latency	inwindow	stimulusnumber1	stimulusitem1	stimulusvpos1	stimulushpos1	stimulusonset1
+091916	15:11:57	1	1	4.0.9.0	1	1		   1	0	0	0	0	0	0	Ctrl+'Q'	1	15450	0	1	tragic	50	50	-3
+091916	15:11:57	1	1	4.0.9.0	1	1		   1	0	0	0	0	0	0	Ctrl+'Q'	1	0	0	3	awful	50	50	-16
+091916	15:11:57	1	1	4.0.9.0	1	1		   1	0	0	0	0	0	0	Ctrl+'Q'	1	0	0	2	horrible	50	50	-16
