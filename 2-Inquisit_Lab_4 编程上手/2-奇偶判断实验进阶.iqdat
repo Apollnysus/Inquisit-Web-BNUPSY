@@ -116,3 +116,10 @@ date	time	group	subject	build	blocknum	trialnum	blockcode	trialcode	pretrialpaus
 110816	16:10:19	1	1	4.0.9.0	2	46	oddevenblk	oddnumbertrial	500	0	0	0	0	0	33	1	38	0	1	+	50pct	50pct	0	4	7	50pct	50pct	1649
 110816	16:10:19	1	1	4.0.9.0	2	47	oddevenblk	oddnumbertrial	500	0	0	0	0	0	33	1	48	0	1	+	50pct	50pct	0	2	3	50pct	50pct	1649
 110816	16:10:19	1	1	4.0.9.0	2	48	oddevenblk	evennumbertrial	500	0	0	0	0	0	36	1	60	0	1	+	50pct	50pct	0	4	8	50pct	50pct	1649
+111016	15:53:54	1	1	4.0.9.0	2	1	oddevenblk	oddnumbertrial	500	0	0	0	0	0	33	1	2247	0	1	+	50pct	50pct	0	3	5	50pct	50pct	1649
+111016	15:53:54	1	1	4.0.9.0	2	2	oddevenblk	evennumbertrial	500	0	0	0	0	0	36	1	479	0	1	+	50pct	50pct	0	3	6	50pct	50pct	1649
+111016	15:53:54	1	1	4.0.9.0	2	3	oddevenblk	oddnumbertrial	500	0	0	0	0	0	33	1	352	0	1	+	50pct	50pct	0	1	1	50pct	50pct	1649
+111016	15:53:54	1	1	4.0.9.0	2	4	oddevenblk	oddnumbertrial	500	0	0	0	0	0	36	0	1105	0	1	+	50pct	50pct	0	4	7	50pct	50pct	1649
+111016	15:53:54	1	1	4.0.9.0	2	5	oddevenblk	evennumbertrial	500	0	0	0	0	0	Ctrl+'Q'	1	158103	0	1	+	50pct	50pct	0	4	8	50pct	50pct	1649
+111116	01:42:49	1	1	4.0.9.0	2	1	oddevenblk	oddnumbertrial	500	0	0	0	0	0	36	0	32	0	1	+	50pct	50pct	0	4	7	50pct	50pct	1649
+111116	01:42:49	1	1	4.0.9.0	2	2	oddevenblk	evennumbertrial	500	0	0	0	0	0	Ctrl+'Q'	1	0	0	1	+	50pct	50pct	0	2	4	50pct	50pct	1649
