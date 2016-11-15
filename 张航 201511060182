@@ -1,0 +1,123 @@
+//先准备好呈现内容，分别是三个汉字 红、绿、蓝
+<item color>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+</item>
+
+//这里制作指导语
+<text instructiontxt>
+	/hjustify = center
+	/items = ("欢迎参加实验！这是一个颜色判断任务。请将左手食指放在“F”键上，右手食指放在“J”键上，两手的大拇指放在空格键上，屏幕上将出现一个注视点，随后出现一个汉字，请判断这个汉字的颜色（注意不是汉字的读音），如果是红色请按“F”键，如果是绿色请按“空格键”，如果是蓝色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+ </text>
+
+//这里制作结束语
+<text goodbyetxt>
+	/hjustify = center
+	/items = ("感谢参与实验！您已完成任务！请呼叫主试")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+ </text>
+
+//这里设定了三种颜色的文本，分别是红、绿、蓝
+<text redtxt>
+	/items = color
+	/fontstyle = ("宋体",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = color
+	/fontstyle = ("宋体",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text bluetxt>
+	/items = color
+	/fontstyle = ("宋体",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+//这里制作一个萌萌的注视点
+<text fixation>
+ 	/items = ("+")
+	/fontstyle = ("宋体", 60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+//这里设定指导语的trial
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+//按钮选项
+<text anykeytxt>
+	/items = ("按任意键继续")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+//这里设定Stroop反应的trial 并规定哪些反应是正确的
+<trial redtrial>
+	/pretrialpause = 100
+	/validresponse = ("F"," ","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 100
+	/validresponse = ("F"," ","J")
+	/correctresponse = (" ")
+	/stimulusframes = [1 = fixation; 100 = greentxt]
+</trial>
+
+<trial bluetrial>
+	/pretrialpause = 100
+	/validresponse = ("F"," ","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = bluetxt]
+</trial>
+
+//这里设定结束语的trial
+<trial goodbye>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=goodbyetxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+//现在每个trial都编辑好了，我们可以把trial组织到block当中，方便实验调用,并返回相应的结果值,最终，我们将block 整合到expt模块中，加在到整个实验当中。、
+//先是指导语的block 然后是Stroop任务的block
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redtrial,greentrial,bluetrial)]
+</block>
+
+<block goodbyeblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = goodbye]
+</block>
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk;3 = goodbyeblk]
+</expt>
