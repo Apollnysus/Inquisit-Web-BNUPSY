@@ -1,0 +1,198 @@
+// 定义刺激呈现的内容列表，item定义
+======================================================================================================================================================================
+<item instruction>
+	/1 = "实验中在屏幕的中央会出现颜色不同的字，请判断字的颜色；
+如果是红色，请按“F”键
+如果是绿色，请按“G”键
+如果是蓝色，请按“H”键
+如果是黄色，请按“J”键"
+</item>
+
+
+<item any>
+	/1 = "请按任意键开始实验"
+
+</item>
+
+<item fixation>
+	/1 = "+"
+</item>
+
+<item character1>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+
+<item character2>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>		
+
+
+<item character3>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+
+<item character4>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+<item goodbyeinstruction>
+	/1="感谢您参与实验，再见！"
+</item>
+=====================================================================================================================================================================
+
+
+//定义刺激呈现的方式，text定义
+======================================================================================================================================================================
+//指导语
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("宋体", 4pct)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1366,768)
+	/hjustify = center
+</text>
+
+
+<text anykeytxt>
+	/items = any
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+//注视点
+<text fixation>
+	/items = fixation
+	/fontstyle = ("Arial", 48pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+//给被试反馈
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text character1txt>
+	/items = character1
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text character2txt>
+	/items = character1
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+
+<text character3txt>
+	/items = character1
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+
+<text character4txt>
+	/items = character1
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+
+//定义trials，定义有效的按键反应，正确的按键反应，刺激呈现顺序等信息
+======================================================================================================================================================================
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial character1trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = character1txt]
+</trial>
+
+
+
+<trial character2trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = fixation; 100 = character2txt]
+</trial>
+
+<trial character3trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("H")
+	/stimulusframes = [1 = fixation; 100 = character3txt]
+</trial>
+
+
+
+<trial character4trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = character4txt]
+</trial>
+
+
+//定义blocks,定义属性信息，加入trails
+======================================================================================================================================================================
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block characterblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(character1trial,character2trial,character3trial,character4trial)]
+</block>
+
+//定义experiment, 加入blocks
+======================================================================================================================================================================
+<expt>
+	/ blocks = [1 = instructionblk; 2 = characterblk]
+</expt>
