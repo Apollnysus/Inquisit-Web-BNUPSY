@@ -1,0 +1,190 @@
+﻿// 定义名为colorwords的文本条目库
+<item colorwords> 
+/1="红"
+/2="绿"
+/3="蓝"
+/4="黄"
+</item>
+*******************************************************************************************************************************************************************************************
+// 定义刺激
+*******************************************************************************************************************************************************************************************
+// 定义名为facilition1~4的文本对象，facilition1~facilition4字的颜色与字的读音一致
+// 从事先定义的colorwords条目库中选取对象
+// 指定选取对象
+// 文本的颜色
+<text facilitation1> 
+/ items = colorwords 
+/ select = 1 
+/ txcolor = red 
+</text>
+<text facilitation2> 
+/ items = colorwords 
+/ select = 2 
+/ txcolor = green 
+</text>
+<text facilitation3> 
+/ items = colorwords 
+/ select = 3 
+/ txcolor = blue 
+</text>
+<text facilitation4> 
+/ items = colorwords 
+/ select = 4 
+/ txcolor = yellow 
+</text>
+
+// 定义名为interference11~34的文本对象，interference11~interference34字的颜色与字的读音不同
+<text interference11> 
+/ items = colorwords 
+/ select = 1
+/ txcolor = green
+</text>
+<text interference12>
+/ items = colorwords
+/ select = 2
+/ txcolor = blue
+</text>
+<text interference13>
+/ items = colorwords
+/ select = 3
+/ txcolor = yellow
+</text>
+<text interference14>
+/ items = colorwords
+/ select = 4
+/ txcolor = red
+</text>
+
+<text interference21> 
+/ items = colorwords 
+/ select = 1
+/ txcolor = blue
+</text>
+<text interference22>
+/ items = colorwords
+/ select = 2
+/ txcolor = yellow
+</text>
+<text interference23>
+/ items = colorwords
+/ select = 3
+/ txcolor = red
+</text>
+<text interference24>
+/ items = colorwords
+/ select = 4
+/ txcolor = green
+</text>
+
+<text interference31> 
+/ items = colorwords 
+/ select = 1
+/ txcolor = yellow
+</text>
+<text interference32>
+/ items = colorwords
+/ select = 2
+/ txcolor = red
+</text>
+<text interference33>
+/ items = colorwords
+/ select = 3
+/ txcolor = green
+</text>
+<text interference34>
+/ items = colorwords
+/ select = 4
+/ txcolor = blue
+</text>
+
+// 定义作为注视点用的fixation文本对象
+<text fixation> 
+/ items = ("+")
+/ fontstyle = ("Arial",3%)
+</text>
+
+// 定义作为指导语用的instructiontxt文本对象
+<text instructiontxt> 
+/ hjustify = left
+/ items = (="请注视+字，屏幕中央会出现不同颜色的文字，请忽视文字的词义，而对文字本身的颜色做出反应，其中“红”按键1、“绿”按键2、“蓝”按键3、“黄”按键4")
+/ size = (640,100)
+/ fontstyle = ("宋体",24pt)
+/ txcolor = (0,255,0)
+/ txbgcolor = (transparent)
+</text>
+
+// 定义按键提示文本对象ankeytxt
+<text anykeytxt> 
+/ items = ("按任意键开始实验")
+/ vposition = 70pct
+/ fontstyle = ("Arial",24pt)
+/ txcolor = (255,0,0)
+/ txbgcolor = (transparent)
+</text>
+*******************************************************************************************************************************************************************************************
+// 定义试次
+*******************************************************************************************************************************************************************************************
+// 定义instruction试次对象
+<trial instruction> 
+/ validresponse = (anyresponse)
+/ stimulusframes = [1=instructiontxt,anykeytxt]
+/ recorddata = false
+</trial>
+
+// 定义名为red、green、blue、yellow的试次对象
+// 定义试次中刺激呈现次序
+// 定义可选按键
+// 定义正确按键
+<trial red> 
+/ stimulustimes = [1=fixation;1500=noreplace(facilitation1,interference14,interference23,interference32)] 
+/ validresponse = ("1","2"，"3","4")
+/ correctresponse = ("1")
+</trial>
+
+<trial green> 
+/ stimulustimes = [1=fixation;1500=noreplace(facilitation2,interference11,interference24,interference33)] 
+/ validresponse = ("1","2"，"3","4")
+/ correctresponse = ("2")
+</trial>
+
+<trial blue> 
+/ stimulustimes = [1=fixation;1500=noreplace(facilitation3,interference12,interference21,interference34)] 
+/ validresponse = ("1","2"，"3","4")
+/ correctresponse = ("3")
+</trial>
+
+<trial yellow> 
+/ stimulustimes = [1=fixation;1500=noreplace(facilitation4,interference13,interference22,interference31)] 
+/ validresponse = ("1","2"，"3","4")
+/ correctresponse = ("4")
+</trial>
+*******************************************************************************************************************************************************************************************
+//定义区组
+*******************************************************************************************************************************************************************************************
+// 定义实验区组
+<block stroopeffect> 
+/ screencolor = (0,0,0)
+/ trials = [1-30=noreplace(red,green,blue,yellow)]
+</block>
+
+// 定义指导语区组
+<block instruction> 
+/ screencolor = (0,0,0)
+/ trials = [1=instruction]
+</block>
+*******************************************************************************************************************************************************************************************
+//定义实验
+*******************************************************************************************************************************************************************************************
+// 实验对象
+<expt stroopeffect> 
+/ blocks = [1=instruction;2=stroopeffect]
+</expt>
+*******************************************************************************************************************************************************************************************
+//定义默认值
+*******************************************************************************************************************************************************************************************
+<defaults>
+/ fontstyle = ("宋体",10%)
+/ txcolor = white 
+/ txbgcolor = black
+</defaults>
+******************************************************************************************************************************************************************************************
