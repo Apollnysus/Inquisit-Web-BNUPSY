@@ -1,0 +1,93 @@
+﻿// stroop实验程序 
+<item ciji>
+	/1 = "红"
+	/2 = "蓝"
+</item>
+
+
+<text bluetxt>
+	/items = ciji
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text redtxt>
+	/items = ciji
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+//在这里增加指导语内容，告知被试任务要求。
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("欢迎您参加我们的实验！在屏幕的中央会随机出现汉字，请判断汉字的颜色；如果汉字的颜色是蓝色请按“F”键，如果单词的颜色是红色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+// 这里增加一个按钮选项，看完指导语之后按任意键继续任务。
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+**************************************************************************************************************************************************************************
+// 接下来要把需要呈现的内容添加到每个trial里
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial bluetrail>
+	/pretrialpause = 1000
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulustimes = [1= fixation; 500 = bluetxt] 
+</trial>
+
+
+<trial redtrial>
+	/pretrialpause = 1000
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulustimes = [1= fixation; 500 = redtxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+
+//增加instruction block来呈现指导语
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+// 把试次组织到区组模块当中，方便实验调用,并返回相应的结果值,最终，我们将block 整合到expt模块中，加在到整个实验当中。
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(bluetrail, redtrial)]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
