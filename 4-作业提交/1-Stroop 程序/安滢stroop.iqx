@@ -1,0 +1,177 @@
+﻿<item words>
+/1="red"
+/2="green"
+/3="blue"
+/4="yellow"
+</item>
+
+//设置文字及颜色
+<text redsame>
+/ items=words
+/select = 1
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = red
+</text>
+
+<text greensame>
+/ items=words
+/select = 2
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = green
+</text>
+
+<text bluesame>
+/ items=words
+/select = 3
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = blue
+</text>
+
+<text yellowsame>
+/ items=words
+/select = 4
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = yellow
+</text>
+
+<text yellowdif>
+/ items = ("red", "green", "blue")
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = yellow
+</text>
+
+
+<text bluedif>
+/ items = ("red", "green", "yellow")
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = blue
+</text>
+
+<text greendif>
+/ items = ("red", "yellow", "blue")
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = green
+</text>
+
+
+<text reddif>
+/ items = ("yellow", "green", "blue")
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = red
+</text>
+
+//反馈给被试的信息
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+//注视点
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (0,0,0)
+</text>
+
+//指导语内容
+
+<text instructiontxt>
+	/hjustify = center
+	/items = (/1 = "在接下来的实验中,您首先会看到一个黑色的注视点“+”,接着您会看不同颜色的单词,请快速选择出单词的颜色而非字义。
+- red请按 d 键
+- green请按 f 键
+- blue请按 j 键
+- yellow请按 k 键
+请您在实验过程中保持盯着注视点, 并且既快又准地报告出材料的呈现颜色, 如果反应错误时不要理会, 只需注意下一个将要出现的词即可。")
+	/size=(1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (0,0,0)
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 90 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (255,255,255)
+</text>
+
+//定义trail
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = fixation; 100 = noreplace(redsame, reddif) ]
+</trial>
+
+<trial greentrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = noreplace(greensame, greendif)]
+</trial>
+
+<trial bluetrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = noreplace(bluesame, bluedif)]
+</trial>
+
+<trial yellowtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = fixation; 100 = noreplace(yellowsame, yellowdif)]
+</trial>
+
+//两个block
+<block instructionblk>
+	/screencolor = (255,255,255)
+	/trials = [1 = instruction]
+</block>
+
+<block stroopblk>
+	/screencolor = (255,255,255)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-32 = noreplace(redtrial, greentrial, bluetrial, yellowtrial)]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
