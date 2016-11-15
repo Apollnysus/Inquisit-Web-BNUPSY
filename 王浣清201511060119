@@ -1,0 +1,143 @@
+// 一个完整的实验要包含哪些要素？ 除了实验主题之外，我们还需要指导语，练习部分，实验主体，呈现注视点，被试反应后给出的反馈结果，实验结束后的感谢语等，我们刚刚编制的程序只有主体部分，却连指导语都没有， 这是非常不完整的，在这个模块中，我们要学习晚上这个实验程序。
+
+**************************************************************************************************************************************************************************
+<item col1>
+	/1 = "字"
+
+</item>
+
+<item col2>
+	/1 = "字"
+
+</item>
+
+<item col3>
+	/1 = "字"
+
+</item>
+
+
+<text col1txt>
+	/items = col1
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text col2txt>
+	/items = col2
+	/ fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text col3txt>
+	/items = col3
+	/ fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+//在这里加入需要反馈给被试的信息，例如是否正确作答，正确的就打一个对号，做错的就打一个错号。
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+//这里增加一个注视点，在每次数字出现之前，让被试集中精力的作用。
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+//在这里增加指导语内容，告知被试任务要求。
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("实验中屏幕上会出现一个汉字，请将手指放在键盘的D,G,J键上，若汉字为红色，请按D键，若汉字为绿色，请按G键，若汉字为蓝色，请按J键")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+// 这里增加一个按钮选项，就是看完指导语之后按任意键继续任务。
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+**************************************************************************************************************************************************************************
+增加几个instruction trial 来呈现指导语
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial col1trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("D","G","J")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = fixation; 100 = col1txt]
+</trial>
+
+<trial col2trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("D","G","J")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = fixation; 100 = col2txt]
+</trial>
+
+<trial col3trial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("D","G","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = col3txt]
+</trial>
+**************************************************************************************************************************************************************************
+<block oddevenblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-24 = noreplace(col1trial, col2trial,col3trial)]
+</block>
+
+//增加instruction block来呈现指导语
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+//先呈现指导语，再呈现主体任务。
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = oddevenblk]
+</expt>
+
+**************************************************************************************************************************************************************************
