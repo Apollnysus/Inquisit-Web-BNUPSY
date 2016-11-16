@@ -1,0 +1,100 @@
+// 定义刺激呈现的内容列表，item定义
+<item instruction>
+	/1="将左数和右手的食指分别放在键盘的“F”键和“J”键上；请注视屏幕中央出现的单词，根据单词的颜色按键。如果是红色，请按“F”键，如果是绿色，请按“J”键"
+
+</item>
+<item any>
+	/1="请按任意键开始实验"
+
+</item>
+
+
+<item red>
+	/1 = "red"
+	/2 = "green"
+	/3 = "blue"
+	/4 = "black"
+</item>
+
+<item green>
+	/1 = "red"
+	/2 = "green"
+	/3 = "blue"
+	/4 = "black"
+</item>
+
+//定义刺激呈现的方式，text定义
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("宋体",40pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+<text anykeytxt>
+	/items = any
+	/vposition = 70 pct
+	/fontstyle = ("宋体",40pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (255,255,255)
+</text>
+
+
+
+<text redtxt>
+	/items = red
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+**************************************************************************************************************************************************************************
+//定义trials，定义有效的按键反应，正确的按键反应，刺激呈现顺序等信息
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greentxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+//定义blocks,定义属性信息，加入trails
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1=instruction]
+</block>
+
+
+<block redgreenblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redtrial, greentrial)]
+</block>
+
+
+//定义experiment, 加入blocks
+<expt>
+	/ blocks = [1 = instructionblk; 2 = redgreenblk]
+</expt>
