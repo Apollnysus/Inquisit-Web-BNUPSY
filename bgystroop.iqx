@@ -1,0 +1,125 @@
+﻿
+
+<item word>
+	/1 = "blue"
+	/2 = "green"
+    /3 = "yellow"
+</item>
+
+
+// 定义好需要呈现的条目之后，我们要考虑，这些item是需要按照文字的方式呈现，那么我们通过"<text></text>"的方式，定义一下以何种形式呈现
+
+<text bluetxt>
+	/items = word
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text greentxt>
+	/items = word
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text yellowtxt>
+	/items = word
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+//在这里加入需要反馈给被试的信息，例如是否正确作答，正确的就打一个对号，做错的就打一个错号。
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+//这里增加一个注视点，在每次数字出现之前，让被试集中精力的作用。
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+//在这里增加指导语内容，告知被试任务要求。
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将手指分别放在键盘的“F”键，“J”键和“Y”上；在屏幕的中央会随机出现单词blue、green或yellow，请判断单词的颜色；如果单词的颜色是蓝色请按“F”键，如果单词的颜色是绿色请按“J”键，如果单词的颜色是黄色请按“Y”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+// 这里增加一个按钮选项，就是看完指导语之后按任意键继续任务。
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+**************************************************************************************************************************************************************************
+// 现在，我们已经定义好了需要呈现的内容，我们接下来要把需要呈现的内容添加到每个trial里，形成一个完整的试次。对于奇数和偶数，被试的正确反映选项是不一样的，因此，我们需要两个trial来呈现。
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial bluetrail>
+	/pretrialpause = 500
+	/validresponse = ("F","J","Y")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = bluetxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J","Y")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = greentxt]
+</trial>
+
+<trial yellowtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J","Y")
+	/correctresponse = ("Y")
+	/stimulusframes = [1 = fixation; 100 = yellowtxt]
+</trial>
+**************************************************************************************************************************************************************************
+
+//增加instruction block来呈现指导语
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+// 现在每个试次都编辑好了，我们可以把试次组织到区组模块当中，方便实验调用,并返回相应的结果值,最终，我们将block 整合到expt模块中，加在到整个实验当中。
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-12 = noreplace(bluetrail, greentrial,yellowtrial)]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
+
