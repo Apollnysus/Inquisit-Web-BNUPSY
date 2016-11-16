@@ -1,0 +1,153 @@
+﻿******************************************************************************************************************************************
+<item instruction>
+	/1 = "请将手指分别放在键盘的“F”、“G”、“H”、“J”键上；
+在屏幕的中央会随机出现不同颜色的字，请判断字的颜色；
+如果是红色，请按“F”键；如果是蓝色，请按“G”键；如果是黄色，请按“H”键；如果是绿色，请按“H”键。"
+</item>
+
+
+<item any>
+	/1 = "请按任意键开始."
+
+</item>
+
+<item red>
+	/1 = "红"
+	/2 = "蓝"
+	/3 = "黄"
+	/4 = "绿"
+</item>
+
+<item blue>
+	/1 = "红"
+	/2 = "蓝"
+	/3 = "黄"
+	/4 = "绿"
+</item>
+
+<item yellow>
+	/1 = "红"
+	/2 = "蓝"
+	/3 = "黄"
+	/4 = "绿"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "蓝"
+	/3 = "黄"
+	/4 = "绿"
+</item>
+
+
+
+
+
+******************************************************************************************************************************************
+<text instructiontxt>
+	/position = (50,50)
+	/items = instruction
+	/txcolor = (255,255,255)
+	/txbgcolor = (0,0,0)
+	/fontstyle = ("宋体",24pt)
+</text>
+
+<text anytxt>
+	/items = any
+    /vposition= 70%
+	/txcolor = (255,255,255)
+	/txbgcolor = (0,0,0)
+	/fontstyle = ("宋体",24pt)
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+</text>
+
+<text redtxt>
+	/items = red
+	/fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text bluetxt>
+	/items = blue
+	/ fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text yellowtxt>
+	/items = yellow
+	/ fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/ fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+
+******************************************************************************************************************************************
+<trial instructiontrial>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation;100 = redtxt]
+</trial>
+
+<trial bluetrial>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = fixation;100 = bluetxt]
+</trial>
+
+<trial yellowtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("H")
+	/stimulusframes = [1 = fixation;100 = yellowtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation;100 = greentxt]
+</trial>
+
+******************************************************************************************************************************************
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instructiontrial]
+</block>
+
+
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redtrial,bluetrial,yellowtrial,greentrial)]
+</block>
+
+******************************************************************************************************************************************
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
+
+
+
