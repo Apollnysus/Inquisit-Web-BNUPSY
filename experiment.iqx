@@ -1,0 +1,127 @@
+﻿<item instruction>
+/1 = " 请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现1个字，请判断该字的字意与颜色是否一致；如果一致请按“F”键，如果不一致请按“J”键。如果对指导语没有疑问,请按任意键开始实验"
+
+<item key>
+/1 = "如果对指导语没有疑问,请按任意键开始实验"
+</item>
+
+<item words>
+/1="red"
+/2="green"
+
+
+<text instructiontxt>
+/items = instruction
+/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+/txcolor = (240, 248, 255)
+/txbgcolor = (transparent)
+/txcolor = (255,255,255)
+/size = (1300,800)
+/hjustify = left
+
+
+<text anykeytxt>
+/items = key
+/vposition = 70 pct
+/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+/txcolor = (255, 0, 0)
+/txbgcolor = (transparent)
+</text>
+</text>
+
+<text redsame>
+/ items=words
+/select = 1
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = red
+</text>
+
+
+
+
+
+<text greensame>
+/ items=words
+/select = 2
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = green
+</text>
+
+
+
+<text greendif>
+/ items = ("red")
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = green
+</text>
+
+
+<text reddif>
+/ items = ("green”)
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (255,255,255)
+/ txcolor = red
+</text>
+
+
+
+<trial instruction>
+/validresponse = (anyresponse)
+/stimulustimes = [1=instructiontxt,anykeytxt]
+/recorddata = false
+</trial>
+</trial>
+
+
+<trial redsame>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("F")
+/stimulusframes = [1 = redsame]
+</trial>
+
+
+<trial greensame>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("F")
+/stimulusframes = [1 = greensame]
+</trial>
+
+
+<trial reddif>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("J")
+/stimulusframes = [1 = reddif]
+</trial>
+
+
+<trial greendif>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse = ("J")
+/stimulusframes = [1 = greendif]
+</trial>
+
+
+	//两个block
+	<block instructionblk>
+	/screencolor = (255,255,255)
+	/trials = [1 = instruction]
+	</block>
+	
+	<block stroopblk>
+	/screencolor = (255,255,255)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-4= noreplacenorepeat(redsame, greensame, reddif,greendif)]
+	</block>
+	
+	<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+	</expt>
+
+
