@@ -1,0 +1,200 @@
+// 定义item，包括指导语、开始实验、以及显示的字
+======================================================================================================================================================================
+<item instruction> 
+/1 = "在屏幕的中央会随机出现1个字，该字所呈现的颜色与其字意可能不同。请根据字所呈现的颜色进行判断。如果字的颜色为红色，请按“R”键；蓝色请按“B”键；绿色请按“G”键。"
+</item>
+
+<item any> 
+/1 = "如果对指导语没有疑问,请按任意键开始实验"
+</item>
+
+<item words> 
+/1 = "红" 
+/2 = "蓝" 
+/3 = "绿"
+</item>
+
+
+=====================================================================================================================================================================
+
+//text定义，确定刺激的格式。
+======================================================================================================================================================================
+<text instructiontxt> 
+/items = instruction 
+/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1) 
+/txcolor = (240, 248, 255) 
+/txbgcolor = (transparent) 
+/txcolor = (255,255,255) 
+/size = (1300,800) /hjustify = left
+</text>
+
+<text anytxt> 
+/items = any 
+/vposition = 70 pct 
+/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1) 
+/txcolor = (255, 0, 0) /txbgcolor = (transparent)
+</text>
+
+<text redwithred> 
+/items = words 
+/select = 1 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (255, 0, 0)
+</text>
+
+<text redwithblue> 
+/items = words 
+/select = 1 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 0, 255)
+</text>
+
+<text redwithgreen> 
+/items = words 
+/select = 1 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 255, 0)
+</text>
+
+<text bluewithred> 
+/items = words 
+/select = 2 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (255, 0, 0)
+</text>
+
+<text bluewithblue> 
+/items = words 
+/select = 2 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 0, 255)
+</text>
+
+<text bluewithgreen> 
+/items = words 
+/select = 2 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 255, 0)
+</text>
+
+<text greenwithred> 
+/items = words 
+/select = 3 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (255, 0, 0)
+</text>
+
+<text greenwithblue> 
+/items = words 
+/select = 3 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 0, 255)
+</text>
+
+<text greenwithgreen> 
+/items = words 
+/select = 3 
+/fontstyle = ("Arial",60ptc) 
+/txbgcolor = (transparent) 
+/txcolor = (0, 255, 0)
+</text>
+
+//定义trials，共9个trial，根据字呈现的颜色红色、蓝色、绿色，正确的反应键分别对应R、B、G
+======================================================================================================================================================================
+<trial instruction> 
+/validresponse = (anyresponse) 
+/stimulustimes = [1=instructiontxt,anykeytxt] 
+/recorddata = false
+</trial>
+
+<trial redwithred> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("R") 
+/stimulusframes = [1 = redwithred]
+</trial>
+
+<trial redwithblue> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("B") 
+/stimulusframes = [1 = redwithblue]
+</trial>
+
+<trial redwithgreen> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("G") 
+/stimulusframes = [1 = redwithgreen]
+</trial>
+
+<trial bluewithred> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("R") 
+/stimulusframes = [1 = bluewithred]
+</trial>
+
+<trial bluewithblue> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("B") 
+/stimulusframes = [1 = bluewithblue]
+</trial>
+
+<trial bluewithgreen> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("G") 
+/stimulusframes = [1 = bluewithgreen]
+</trial>
+
+<trial greenwithred> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("R") 
+/stimulusframes = [1 = greenwithred]
+</trial>
+
+<trial greenwithblue> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("B") 
+/stimulusframes = [1 = greenwithblue]
+</trial>
+
+<trial greenwithgreen> 
+/pretrialpause = 500 
+/validresponse = ("R","G","B") 
+/correctresponse = ("G") 
+/stimulusframes = [1 = greenwithgreen]
+</trial>
+
+
+//定义blocks,定义两个block，并在block里添加trials
+======================================================================================================================================================================
+<block instructionblk> 
+/screencolor = (0,0,0) 
+/trials = [1 = instruction]
+</block>
+
+<block colorjudgeblk> 
+/screencolor = (0,0,0) 
+/blockfeedback = (meanlatency,correct) 
+/trials = [1-18 = noreplacenorepeat(redwithred, redwithblue, redwithgreen, bluewithred, bluewithblue, bluewithgreen, greenwithred, greenwithblue, greenwithgreen)]
+</block>
+
+
+//定义experiment, 加入blocks
+======================================================================================================================================================================
+<expt> 
+/ blocks = [1 = instructionblk; 2 = colorjudgeblk]
+</expt>
