@@ -1,0 +1,207 @@
+﻿// item定义，确定刺激呈现的内容列表，在这里，我们考虑到需要有指导语，跳过指导语提醒，还有需要呈现的颜色词，所以我们要定义3个item 列表
+======================================================================================================================================================================
+<item instruction>
+	/1 = "  请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现1个字，请判断该字的字意与颜色是否一致；如果一致请按“F”键，如果不一致请按“J”键。"
+</item>
+
+
+<item key>
+	/1 = "如果对指导语没有疑问,请按任意键开始实验"
+</item>
+
+
+<item colorwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "绿"
+</item>
+=====================================================================================================================================================================
+
+
+//text定义，确定刺激的格式，在这里最重要的就是colorwords的呈现颜色。因为要呈现颜色一致的情况和颜色不一致的情况，因此，这里需要呈现9可能。其中，颜色和字意一样的有3种可能，颜色和字意不一样的有6种可能，我们将9中情况都写出来。
+======================================================================================================================================================================
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (240, 248, 255)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+
+<text anykeytxt>
+	/items = key
+	/vposition = 70 pct
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (255, 0, 0)
+	/txbgcolor = (transparent)
+</text>
+
+
+<text redsame>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text yellowsame>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 255, 0)
+</text>
+
+<text greensame>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text redwithyellow>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 255, 0)
+</text>
+
+<text redwithgreen>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text yellowwithred>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text yellowwithgreen>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text greenwithred>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text greenwithyellow>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255, 255, 0)
+</text>
+
+
+//定义trials，我们需要定义两类trial，共9个trial，因为对于颜色一致的词，我们的正确反应键定位F；对于颜色不一致的词，我们的正确反应键定义为F。另外，还有一个是指导语的trial
+======================================================================================================================================================================
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulustimes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redsame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redsame]
+</trial>
+
+<trial yellowsame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = yellowsame]
+</trial>
+
+<trial greensame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = greensame]
+</trial>
+
+<trial redwithyellow>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redwithyellow]
+</trial>
+
+<trial redwithgreen>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redwithgreen]
+</trial>
+
+<trial yellowwithred>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowwithred]
+</trial>
+
+<trial yellowwithgreen>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowwithgreen]
+</trial>
+
+<trial greenwithred>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greenwithred]
+</trial>
+
+<trial greenwithyellow>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greenwithyellow]
+</trial>
+
+//定义blocks,我们在这里定义两个block，并在block里添加trials
+======================================================================================================================================================================
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block colorjudgeblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-18 = noreplacenorepeat(redsame, yellowsame, greensame, redwithyellow, redwithgreen, yellowwithred, yellowwithgreen, greenwithred, greenwithyellow)]
+</block>
+
+//定义experiment, 加入blocks
+======================================================================================================================================================================
+<expt>
+	/ blocks = [1 = instructionblk; 2 = colorjudgeblk]
+</expt>
+
+
