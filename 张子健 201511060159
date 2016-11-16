@@ -1,0 +1,103 @@
+//我是北京师范大学心理学院2015级本科生张子健，学号201511060159，对于人机交互、用户体验、虚拟现实技术很感兴趣，希望能跟随魏师兄和蒋老师学习实验编程技术，掌握matlab、python等编程技能，更好地应用到心理学当中，谢谢师兄！
+//讲个笑话吧：程序员找同事借钱，说就借1000马上还，同事答曰没问题，凑个整你拿1024吧！
+<item red>
+	/1 = "红"
+	/2 = "绿"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "绿"
+</item>
+
+<text redtxt>
+	/items = red
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将左手和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现红色或绿色的词语，请判断词语的颜色，如果是红色请按“F”键，如果是绿色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redtxt]
+</trial>
+
+<trial greentrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = greentxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+<block colorblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-4 = noreplace(redtrial, greentrial)]
+</block>
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = colorblk]
+</expt>
