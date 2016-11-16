@@ -1,0 +1,141 @@
+// colorstroop
+**************************************************************************************************************************************************************************
+// 李沛然 rpl
+
+<item red>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+<item blue>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+<item yellow>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+<text red>
+	/items = red
+	/fontstyle = ("宋体",48pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text green>
+	/items = green
+	/fontstyle = ("宋体",48pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text blue>
+	/items = blue
+	/fontstyle = ("宋体",48pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text yellow>
+	/items = red
+	/fontstyle = ("宋体",48pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text instruction>
+    /hjustify = left 
+	/items = ("欢迎参加本次试验，屏幕上出现一系列的文字，请判断文字的颜色。红色请按“f”，绿色请按“g”，蓝色请按“h”，黄色请按“j”。")
+	/fontstyle = ("宋体",24pt)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+</text>
+
+<text fixation>
+    /items = ("+")
+    /fontstyle = ("宋体",5%)
+    /txbgcolor = (0,0,0)
+    /txcolor = (255,255,255)
+</text>
+
+<text anykeys>
+	/items = ("请按任意键继续")
+	/vposition= 70%
+	/txcolor = (255,0,0)
+	/txbgcolor = (0,0,0)
+	/fontstyle = ("宋体",24pt)
+</text>
+
+
+**************************************************************************************************************************************************************************
+// rpl
+
+<trial red>
+	/pretrialpause = 500
+	/validresponse = ("f","g","h","j")
+	/correctresponse = ("f")
+	/stimulusframes = [1=fixation;500=red]
+</trial>
+
+<trial green>
+	/pretrialpause = 500
+	/validresponse = ("f","g","h","j")
+	/correctresponse = ("g")
+	/stimulusframes = [1=fixation;500=green]
+</trial>
+
+<trial blue>
+	/pretrialpause = 500
+	/validresponse = ("f","g","h","j")
+	/correctresponse = ("h")
+	/stimulusframes = [1=fixation;500=blue]
+</trial>
+
+<trial yellow>
+	/pretrialpause = 500
+	/validresponse = ("f","g","h","j")
+	/correctresponse = ("j")
+	/stimulusframes = [1=fixation;500=red]
+</trial>
+
+<trial instruction>
+/validresponse=(anyresponse)
+/stimulusframes = [1=instruction,anykeys]
+/recorddata = false
+</trial>
+**************************************************************************************************************************************************************************
+
+<block instruction>
+   /screencolor = (0,0,0)
+   /trials=[1=instruction]
+</block>
+
+<block colorstroop>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-32 = noreplace(red, green,blue,yellow)]
+</block>
+
+
+<expt>
+	/ blocks = [1 = instruction;2=colorstroop]
+</expt>
+
+**************************************************************************************************************************************************************************
+
+
