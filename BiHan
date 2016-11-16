@@ -1,0 +1,72 @@
+<item white>
+	/1 = "白"
+	/2 = "红"
+</item>
+
+<item red>
+	/1 = "白"
+	/2 = "红"
+</item>
+
+<text instruction>
+	/hjustify = left 
+	/items = ("屏幕上会出现一些汉字，请判断汉字的颜色。
+              白色请按“F”键，红色请按“J”键")
+	/txcolor = (255,255,255)
+	/txbgcolor = (0,0,0)
+	/fontstyle = ("Arial",24pt)
+</text>
+
+<text whitetxt>
+	/items = white
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+</text>
+
+<text redtxt>
+	/items = red
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text> 
+
+**************************************************************************************************************************************************************************
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1 = instruction]
+	/recorddata = false 
+</trial>
+
+<trial whitetrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = whitetxt]
+</trial>
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redtxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+
+<block instruction>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block whiteredblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(whitetrial, redtrial)]
+</block>
+
+
+<expt>
+	/ blocks = [1 = instruction;2 = whiteredblk]
+</expt>
