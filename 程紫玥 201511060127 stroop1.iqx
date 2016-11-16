@@ -1,0 +1,125 @@
+﻿<item begin>
+/1="请把你的左手和右手的食指和中指放在键盘的“D”、“F”、“G”和“H”键上，待会儿屏幕中央会出现一些字，请判断字的颜色，如果是红色按“F”键，是蓝色按“G”键，是绿色按“H”键，黄色按“J”键"
+</item>
+
+<item any>
+/1="请按任意键开始实验"
+</item>
+
+<item redwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+
+<item greenwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+<item yellowwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+<item bluewords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+
+<text begintxt>
+/items=begin
+/fontstyle = ("楷体", 4pct)
+/txbgcolor = (0,0,0)
+/txcolor = (255,0,255)
+/size = (1300,800)
+/hjustify = center
+</text>
+
+<text anykeytxt>
+/items = any
+/vposition = 70 pct
+/fontstyle = ("楷体", 24pt)
+/txcolor = (255,0,0)
+/txbgcolor = (transparent)
+</text>
+<text redwordstxt>
+	/items = redwords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text yellowwordstxt>
+	/items = yellowwords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+<text bluewordstxt>
+	/items = bluewords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,255)
+</text>
+<text greenwordstxt>
+	/items = greenwords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+**************************************************************************************************************************************************************************
+
+<trial begin>
+/validresponse = (anyresponse)
+/stimulusframes = [1=begintxt,anykeytxt]
+/recorddata = false
+</trial>
+<trial redwords>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redwordstxt]
+</trial>
+<trial yellowwords>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = yellowwordstxt]
+</trial>
+<trial greenwords>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("H")
+	/stimulusframes = [1 = greenwordstxt]
+</trial>
+<trial bluewords>
+	/pretrialpause = 500
+	/validresponse = ("F","G","H","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = bluewordstxt]
+</trial>
+
+
+**************************************************************************************************************************************************************************
+
+<block beginblk>
+/screencolor = (0,0,0)
+/trials = [1 = begin]
+</block>
+
+
+<block redbluegreenyellowblk>
+/screencolor = (0,0,0)
+/blockfeedback = (meanlatency,correct)
+/trials = [1-16 = noreplace(redwords, bluewords,greenwords,yellowwords)]
+</block>
+
+<expt>
+/ blocks = [1 = beginblk; 2 =redbluegreenyellowblk ]
+</expt>
