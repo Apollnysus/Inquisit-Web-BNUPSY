@@ -1,0 +1,137 @@
+//指导语，告知被试任务要求。
+<text instxt>
+	/vposition = 30 pct
+	/items = ("指导语")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 30pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现一个汉字，请判断字的颜色；如果字是红色的，请按F键；如果是蓝色的，请按J键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+// 这里增加一个按钮选项，就是看完指导语之后按任意键继续任务。
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+
+
+//在这里加入需要反馈给被试的信息，例如是否正确作答，正确的就打一个对号，做错的就打一个错号。
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+//这里增加一个注视点，在每次数字出现之前，让被试集中精力的作用。
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+**************************************************************************************************************************************************************************
+增加几个instruction trial 来呈现指导语
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instxt,instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+
+
+//增加instruction block来呈现指导语
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+
+// 正式实验
+
+<item word>
+	/1 = "红"
+	/2 = "蓝"
+</item>
+
+
+
+// 文字呈现形式
+
+<text redwordtxt>
+	/items = word
+	/fontstyle = ("Arial",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text bluewordtxt>
+	/items = word
+	/ fontstyle = ("Arial",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<trial redwordtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redwordtxt]
+</trial>
+
+<trial bluewordtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 =bluewordtxt]
+</trial>
+
+
+
+<block redblueblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1- 16= noreplace(redwordtrial, bluewordtrial)]
+</block>
+
+
+
+//先呈现指导语，再呈现主体任务。
+
+
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = redblueblk]
+</expt>
