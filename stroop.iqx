@@ -64,14 +64,14 @@
 // 文字呈现形式
 
 <text redtxt>
-	/items = red
+	/items = redword
 	/fontstyle = ("Arial",80ptc)
 	/txbgcolor = (0,0,0)
 	/txcolor = (255,0,0)
 </text>
 
 <text bluetxt>
-	/items = blue
+	/items = blueword
 	/ fontstyle = ("Arial",80ptc)
 	/txbgcolor = (0,0,0)
 	/txcolor = (0,0,255)
