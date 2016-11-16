@@ -32,14 +32,14 @@
 </text>
 
 <text correctmsg>
-	/items = ("â")
+	/items = ("√")
 	/fontstyle = ("Arial", 10%)
 	/txbgcolor = (transparent)
 	/txcolor = (0,255,0)
 </text>
 
 <text errormsg>
-	/items = ("√")
+	/items = ("×")
 	/fontstyle = ("Arial", 10%)
 	/txbgcolor = (transparent)
 	/txcolor = (255,0,0)
