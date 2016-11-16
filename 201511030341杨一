@@ -7,4 +7,136 @@
 努力探索中...
 
 stroop效应编程
+å®ä¹åç°çæ¡ç®
+======================================================================================================================================================================
+
+
+ 
+ <item word1>
+ 	/1 = "çº¢"
+ 	
+ </item>
+ 
+ 
+ <item word2>
+ 	/1 = "è"
+ 	
+ </item>
+
+ <item instruction>
+    /1= "è¯·å°æææ¾å¨é®çä¸çâFâåâJâä¸ï¼è¥æ­£å¼å®éªæ¶å±å¹ä¸åç°çå­ç©çé¢è²æ¯çº¢è²ï¼åæâFâé®ï¼è¥å­çç©çé¢è²æ¯èè²ï¼åæâJâé®ï¼è¯·å¨æå­åºç°åå°½å¿«æé®ã"
+  
+</item>
+ 
+ =====================================================================================================================================================================
+ 
+ 
+ //å®ä¹åºæ¿åç°çæ¹å¼ï¼textå®ä¹
+======================================================================================================================================================================
+ <text instructiontxt>
+ 	/items = instruction
+ 	/fontstyle = ("å®ä½", 4pct)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,255,255)
+ 	/size = (1500,800)
+ 	/hjustify = center
+ </text>
+ 
+
+ <text anykeytxt>
+ 	/items = ("æä»»æé®å¼å§å®éª")
+ 	/vposition = 70 pct
+ 	/fontstyle = ("å®ä½", 5pct)
+ 	/txcolor = (255,0,0)
+ 	/txbgcolor = (0,0,0)
+ </text>
+ 
+ //æ³¨è§ç¹çè®¾ç½®
+ <text fixation>
+ 	/items = ("+")
+ 	/fontstyle = ("Arial", 40ptc)
+ 	/txbgcolor = (transparent)
+ 	/txcolor = (255,255,255)
+ </text>
+ <text different1txt>
+ 	/items = word1
+ 	/fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+ </text>
+ 
+ <text same1txt>
+ 	/items = word1
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,0,0)
+ </text>
+ <text different2txt>
+ 	/items = word2
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,0,0)
+ </text>
+ <text same2txt>
+ 	/items = word2
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (0,0,255)
+ </text>
+ 
+ //å®ä¹trialsï¼å®ä¹ææçæé®ååºï¼æ­£ç¡®çæé®ååºï¼åºæ¿åç°é¡ºåºç­ä¿¡æ¯
+ ======================================================================================================================================================================
+ <trial instruction>
+ 	/validresponse = (anyresponse)
+ 	/stimulusframes = [1=instructiontxt,anykeytxt]
+ 	/recorddata = false
+ </trial>
+ 
+ <trial same1trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+	/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same1txt]
+ </trial>
+ 
+ <trial same2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same2txt]
+ </trial>
+ 
+ <trial different1trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different1txt]
+ </trial>
+ <trial different2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different2txt]
+ </trial>
+ 
+ //å®ä¹blocks,å®ä¹å±æ§ä¿¡æ¯ï¼å å¥trails
+ ======================================================================================================================================================================
+ <block instructionblk>
+ 	/screencolor = (0,0,0)
+ 	/trials = [1 = instruction]
+ </block>
+ 
+
+ <block stroopblk>
+ 	/screencolor = (0,0,0)
+ 	/blockfeedback = (meanlatency,correct)
+ 	/trials = [1-8 = noreplace(same1trial, same2trial,different1trial,different2trial)]
+ </block>
+ 
+ //å®ä¹experiment, å å¥blocks
+ ======================================================================================================================================================================
+ <expt>
+ 	/ blocks = [1 = instructionblk; 2 = stroopblk]
+ </expt>
+
 
