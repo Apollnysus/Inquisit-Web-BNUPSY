@@ -154,12 +154,22 @@
 </text>
 
 
+//定义values & expressions，让我们的注视点呈现时间任性起来。
+======================================================================================================================================================================
+<values>
+	/fixationtime = 0
+</values>
+
+<expressions>
+	/generaterandom = ceil(rand(400,600))
+</expressions>
+
 
 //定义trials，我们需要定义两类trial，共9个trial，因为对于颜色一致的词，我们的正确反应键定位F；对于颜色不一致的词，我们的正确反应键定义为F。另外，还有一个是指导语的trial
 ======================================================================================================================================================================
 <trial instruction>
 	/validresponse = (anyresponse)
-	/stimulustimes = [1=instructiontxt，anykeytxt]
+	/stimulustimes = [1=instructiontxt, anykeytxt]
 	/recorddata = false
 </trial>
 
@@ -169,7 +179,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("F")
-	/stimulustimes = [1=fixation;200=redsame]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redsamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redsamet.insertstimulustime(text.redsame,values.fixationtime)]
+	/ontrialend = [trial.redsamet.clearstimulusframes()]
 </trial>
 
 <trial yellowsamet>
@@ -178,7 +191,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("F")
-	/stimulustimes = [1=fixation;200=yellowsame]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowsamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowsamet.insertstimulustime(text.yellowsame,values.fixationtime)]
+	/ontrialend = [trial.yellowsamet.clearstimulusframes()]
 </trial>
 
 <trial greensamet>
@@ -187,7 +203,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("F")
-	/stimulustimes = [1=fixation;200=greensame]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greensamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greensamet.insertstimulustime(text.greensame,values.fixationtime)]
+	/ontrialend = [trial.greensamet.clearstimulusframes()]
 </trial>
 
 <trial redwithyellowt>
@@ -196,7 +215,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=redwithyellow]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redwithyellowt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redwithyellowt.insertstimulustime(text.redwithyellow,values.fixationtime)]
+	/ontrialend = [trial.redwithyellowt.clearstimulusframes()]
 </trial>
 
 <trial redwithgreent>
@@ -205,7 +227,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=redwithgreen]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redwithgreent.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redwithgreent.insertstimulustime(text.redwithgreen,values.fixationtime)]
+	/ontrialend = [trial.redwithgreent.clearstimulusframes()]
 </trial>
 
 <trial yellowwithredt>
@@ -214,7 +239,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=yellowwithred]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowwithredt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowwithredt.insertstimulustime(text.yellowwithred,values.fixationtime)]
+	/ontrialend = [trial.yellowwithredt.clearstimulusframes()]
 </trial>
 
 <trial yellowwithgreent>
@@ -223,7 +251,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=yellowwithgreen]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowwithgreent.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowwithgreent.insertstimulustime(text.yellowwithgreen,values.fixationtime)]
+	/ontrialend = [trial.yellowwithgreent.clearstimulusframes()]
 </trial>
 
 <trial greenwithredt>
@@ -232,7 +263,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=greenwithred]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greenwithredt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greenwithredt.insertstimulustime(text.greenwithred,values.fixationtime)]
+	/ontrialend = [trial.greenwithredt.clearstimulusframes()]
 </trial>
 
 <trial greenwithyellowt>
@@ -241,7 +275,10 @@
 	/errormessage = (errormsg,500)
 	/validresponse = ("F","J")
 	/correctresponse = ("J")
-	/stimulustimes = [1=fixation;200=greenwithyellow]
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greenwithyellowt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greenwithyellowt.insertstimulustime(text.greenwithyellow,values.fixationtime)]
+	/ontrialend = [trial.greenwithyellowt.clearstimulusframes()]
 </trial>
 
 //定义blocks,我们在这里定义两个block，并在block里添加trials
