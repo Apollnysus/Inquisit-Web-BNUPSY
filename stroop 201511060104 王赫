@@ -1,0 +1,90 @@
+//首先是要呈现什么文字
+<item instruction>
+	/1 = "  欢迎你来参加试验
+        请将左手和右手的食指分别放在键盘的“F”和“J”键上,在屏幕中央会随机出现红色或绿色的文字.请注意字体的颜色，如果是红色的字，就按“F”键，如果是绿色的字,就按“J”键。"
+</item>
+
+<item any>
+	/1 = "请按任意键开始试验"
+</item>
+
+<item words>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "X"
+</item>
+
+//实验的说明和实验介绍
+<text instructiontxt>
+	/items = instruction
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/ fontstyle = ("宋体",7pct)
+	/size = (1300,700)
+	/hjustify = left
+</text>
+
+<text anykeytxt>
+	/items = any
+	/vposition= 90 pct
+	/fontstyle = ("宋体" , 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+
+//将item变成text 并且控制一下颜色，字体等一些文字属性
+<text redtxt>
+	/items = words
+	/ fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = words
+	/ fontstyle = ("宋体",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+//trail
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1 = instructiontxt , anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greentxt]
+</trial>
+
+//block
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency , correct)
+	/trials = [1-12 = noreplace(redtrial , greentrial)]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk ; 2 = stroopblk]
+</expt>
+
+
+
+
