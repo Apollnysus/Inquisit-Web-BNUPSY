@@ -1,0 +1,126 @@
+<item instruction>
+	/1="请将左数和右手的食指分别放在键盘的“F”键和“J”键上，屏幕上会出现红色和绿色的文字和符号，
+        如果是字体颜色是红色请按“F”键，如果是字体颜色是绿色请按“J”键"
+</item>
+
+
+<item anykey>
+	/1 = "请按任意键实验"
+</item>
+
+<item stimulus>
+	/1="红"
+	/2="绿"
+	/3="***"
+</item>
+
+
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("宋体", 4pct)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+<text anykeytxt>
+	/items = anykey
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+
+</text>
+
+<text facil1>
+	/items=stimulus
+	/select = 1
+	/txcolor = red
+	/fontstyle = ("宋体", 60pt)
+</text>
+
+
+<text facil2>
+	/items=stimulus
+	/select=1
+	/txcolor= green
+	/fontstyle = ("宋体", 60pt)
+</text>
+
+<text interf1>
+	/items = stimulus
+	/select = 2
+	/txcolor = green
+	/fontstyle = ("宋体", 60pt)
+</text>
+
+<text interf2>
+	/items=stimulus
+	/select=2
+	/txcolor=red 
+	/fontstyle= ("宋体", 60pt)
+</text>
+
+<text neutral1>
+	/items=stimulus
+	/select=3
+	/txcolor=red 
+	/fontstyle= ("宋体", 60pt)
+</text>
+
+<text neutral2>
+	/items=stimulus
+	/select=3
+	/txcolor=green
+	/fontstyle= ("宋体", 60pt)
+</text>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial red>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = noreplace(facil1, interf2)]
+</trial>
+
+<trial green>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = noreplace(facil2, interf1)]
+</trial>
+
+<trial neutral1>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = neutral1]
+</trial>
+
+<trial neutral2>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = neutral2]
+</trial>
+
+<block instruction>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block stimulus>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(red, green, neutral1, neutral2)]
+</block>
+
+<expt>
+	/ blocks = [1 = instruction; 2 = stimulus]
+</expt>
