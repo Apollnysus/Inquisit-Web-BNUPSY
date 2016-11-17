@@ -1,0 +1,129 @@
+﻿<item green>
+	/1="红"
+	/2="绿"
+</item>
+
+<item red>
+	/1="红"
+	/2="绿"
+</item>
+
+<item blue>
+	/1="蓝"
+	/2="黄"
+</item>
+
+<item yellow>
+	/1="蓝"
+	/2="黄"
+</item>
+
+//需要以文字方式呈现
+
+<text greentxt>
+	/items = green
+	/fontstyle = ("宋体",120ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text redtxt>
+	/items = red
+	/fontstyle = ("宋体",120ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text bluetxt>
+	/items = blue
+	/fontstyle = ("宋体",120ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text yellowtxt>
+	/items = yellow
+	/fontstyle = ("宋体",120ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+**************************************************************************
+//加一个注视点
+<text fixation>
+	/items = ("+")
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/fontstyle = ("宋体",90ptc)
+</text>
+
+//指导语
+<text instructiontxt>
+	/hjustify = center
+	/items = ("这是一个测反应时的实验。实验中屏幕会呈现一系列有颜色的汉字。呈现绿颜色汉字时按D键，黄颜色汉字时按F键，红颜色汉字时按J键，蓝颜色汉字时按K键，而不要管那个字的字义是什么。反应越快越好，系统会自动记录你的反应时间。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)            
+	/txcolor = (0,255,0)
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+**********************************************************************************************
+//增添trial
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500                     
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = fixation; 100 = greentxt]           
+</trial>
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = redtxt]
+</trial>
+
+<trial yellowtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = yellowtxt]
+</trial>
+
+<trial bluetrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J","D","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = fixation; 100 = bluetxt]
+</trial>
+
+******************************************************************************
+<block color>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)                        
+	/trials = [1-16 = noreplace(greentrial, redtrial,bluetrial,yellowtrial)]
+</block>
+
+<block instruction>
+	/trials = [1=instruction]
+	/screencolor = (0,0,0)
+</block>
+
+****************************************************************************
+<expt >
+	/ blocks = [1=instruction;2=color]
+</expt>
