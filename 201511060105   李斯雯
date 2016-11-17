@@ -1,0 +1,245 @@
+<item instruction>
+	/1="欢迎您参与本次实验!"
+	/2="在接下来的实验中，您首先会看到一个黑色的注视点,接着您会看到一个刺激，并且这个刺激的呈现颜色和词义颜色不一定是相同的。请您选择每个刺激的呈现颜色，忽略它的词义颜色。
+		请您按照下面的指示，选择您看到的汉字呈现的颜色：
+		-红色请按d键
+		-绿色请按f键
+		-蓝色请按j键
+		-黄色请按k键
+		请您在实验过程中保持盯着注视点, 并且既快又准地报告出材料的呈现颜色, 如果反应错误时不要理会, 只需注意下一个将要出现的词即可。
+		请您将左右手的中指和食指分别放在“d”“f”“j”“k”键上,以便于实验。"
+		
+</item>
+
+<item any>
+	/1="如果您已经了解本实验的流程和注意事项,请按任意键开始进入实验。"
+
+</item>
+
+
+
+<item word1>
+	/1="红"
+</item>
+
+<item word2>
+	/1="黄"
+
+</item>
+
+<item word3>
+	/1="绿"
+
+</item>
+
+<item word4>
+	/1="蓝"
+
+
+</item>
+
+<item word5>
+	/1="黄"
+</item>
+
+<item word6>
+	/1="绿"
+
+</item>
+
+<item word7>
+	/1="蓝"
+
+</item>
+
+<item word8>
+	/1="红"
+
+
+</item>
+
+<item endinstruction>
+	/1="实验结束，谢谢您的参与！"
+
+</item>
+
+
+
+
+<text instructiontxt>
+	/items=instruction
+	/fontstyle = ("宋体", 4pct)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text anykeytxt>
+	/items = any
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+
+
+
+<text word1txt>
+	/items=word1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)  
+</text>
+
+
+<text word2txt>
+	/items=word2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)  
+</text>
+
+<text word3txt>
+	/items=word3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)  
+</text>
+
+
+<text word4txt>
+	/items=word4
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (124,252,0)  
+</text>
+
+
+<text word5txt>
+	/items=word5
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)  
+</text>
+
+
+<text word6txt>
+	/items=word6
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)  
+</text>
+
+<text word7txt>
+	/items=word7
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (124,252,0)  
+</text>
+
+
+<text word8txt>
+	/items=word8
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)  
+</text>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial word1trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = word1txt]
+</trial>
+
+
+<trial word2trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = word2txt]
+</trial>
+
+
+<trial word3trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = word3txt]
+</trial>
+
+
+<trial word4trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = word4txt]
+</trial>
+
+
+<trial word5trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = word5txt]
+</trial>
+
+
+<trial word6trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = word6txt]
+</trial>
+
+
+<trial word7trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = word7txt]
+</trial>
+
+
+<trial word8trial>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = word8txt]
+</trial>
+
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block wordblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-8 = noreplace(word1trial, word2trial,word3trial, word4trial,word5trial, word6trial,word7trial, word8trial)]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = wordblk]
+</expt>
+
+
+
+
