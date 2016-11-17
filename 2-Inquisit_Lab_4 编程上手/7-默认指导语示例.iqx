@@ -1,0 +1,20 @@
+﻿// 指导语要漂亮--采用默认的instruct标记符构建方法
+
+<instruct myinstruct>
+	/nextkey = (" ")
+	/fontstyle = ("楷体", 3.14%, false, false, false, false, 5, 1)
+	/txcolor = (0,0,255)
+	/screencolor = (255,255,255)
+	/lastlabel = "请按空格键继续"
+	/windowsize = (1000,800)
+</instruct>
+
+<page instruction>这是我的第一个指导语，我想尽量做的漂亮^^今天我就来试试，看看手气怎么样^^床前明月光，疑是地上霜。^^举头望明月,低头思故乡^^ </page>
+
+<page endinstruction>哎呀，干的漂亮！！！^^今天的课马上就讲完了，学霸们又要开始写作业了^^ </page>
+
+
+<expt defaultinstruction>
+	/preinstructions = (instruction)
+	/postinstructions = (endinstruction)
+</expt>
