@@ -1,0 +1,61 @@
+﻿//created by LiuJia0117  STROOP效应再现
+<item red>
+/1="红色"
+/2="蓝色"
+</item>
+
+<item blue>
+/1="红色"
+/2="蓝色"
+</item>
+
+<text red>
+/items=red
+/txcolor=(255,0,0)
+/txbgcolor=(0,0,0)
+/fontstyle=("宋体",48pt)
+</text>
+
+<text blue>
+/items=red
+/txcolor=(0,0,255)
+/txbgcolor=(0,0,0)
+/fontstyle=("宋体",48pt)
+</text>
+
+<text instruction>
+/hjustify=left
+/items=("屏幕上会出现一些汉字，请判断汉字的颜色。红色请按“F”键，蓝色请按“J”键")
+/txcolor=(255,255,255)
+/txbgcolor=(0,0,0)
+/fontstyle=("宋体",24pt)
+</text>
+
+<trial red>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse =("F")
+/stimulustimes = [500=red]
+</trail>
+
+<trial blue>
+/pretrialpause = 500
+/validresponse = ("F","J")
+/correctresponse =("J")
+/stimulustimes = [500=blue]
+</trail>
+
+<block instruction>
+/screencolor = (0,0,0)
+/trials = [1=instructon]
+</block>
+
+<block stroop>
+/screencolor = (0,0,0)
+/blockfeedback = (meanlatency,correct)
+/trials = [1-16=noreplace(red,blue)]
+</block>
+
+<expt>
+/blocks=[1=instruction;2=stroop]
+</expt>

@@ -1,5 +1,6 @@
+//定义呈现刺激的内容条目，定义items
 	<item instruction>
-	/1 = "在屏幕中央将会随机呈现红色或绿色的单词；如果单词是红色，请按"F"键，如果单词是绿色，请按"J"键。"
+	/1 = "请将左手和右手的食指分别放在键盘上的"F"键和"J"键上；在屏幕中央将会随机呈现红色和绿色的英文单词；请注意单词的颜色，如果是红色，情按"F"键，如果是绿色，情按"J"键。"
 </item>
 
 
@@ -26,7 +27,7 @@
 
 
 	<text anykeytxt>
-	/items = any	
+	/items = any
 	/vposition = 70pct
 	/fontstyle = ("宋体", 24pt)
 	/txcolor = (255,0,0)
@@ -74,6 +75,7 @@
 </text>
 
 
+
 	<trial instruction>
 	/validresponse = (anyresponse)
 	/stimulusframes = [1=instructiontxt,anykeytxt]
@@ -101,6 +103,7 @@
 </trial>
 
 
+// define blocks
 	<block redgreenblk>
 	/ screencolor = (0,0,0)
 	/ blockfeedback = (meanlatency,correct)
@@ -114,6 +117,7 @@
 </block>
 
 
+//define experiment
 	<expt>
 	/blocks = [1 = instructionblk;2 = redgreenblk]
 </expt>
