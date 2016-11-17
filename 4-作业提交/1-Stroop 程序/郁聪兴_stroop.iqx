@@ -1,0 +1,108 @@
+﻿
+//指导语
+<item instrction>
+    /1 = "欢迎来到我们的实验，屏幕上会出现一些汉字，请判断汉字的颜色。红色请按“F”键，黄色请按“G”键，绿色请按“H”键，蓝色请按“J”键。请按空格键继续……"
+</item>
+
+//刺激材料
+<item corlorwords>
+    /1 = "红"
+    /2 = "蓝"
+    /3 = "绿"
+    /4 = "黄"
+</item>
+
+
+<text bluewordstxt>
+	/items = corlorwords
+	/txbgcolor = (0,0,0)
+    /fontstyle = ("宋体",48pt)
+	/txcolor = (0,0,255)
+</text>
+
+<text redwordstxt>
+	/items = corlorwords
+	/txbgcolor = (0,0,0)
+    /fontstyle = ("宋体",48pt)
+	/txcolor = (255,0,0)
+</text>
+
+
+<text greenwordstxt>
+	/items = corlorwords
+	/txbgcolor = (0,0,0)
+    /fontstyle = ("宋体",48pt)
+	/txcolor = (0,255,0)
+</text>
+
+<text yellowwordstxt>
+	/items = corlorwords
+	/txbgcolor = (0,0,0)
+    /fontstyle = ("宋体",48pt)
+	/txcolor = (255,255,0)
+</text>
+
+<text instructiontxt>
+    /items = instrction
+	/txbgcolor = (0,0,0)
+    /fontstyle = ("宋体",12pt)
+	/txcolor = (255,255,255)
+</text>
+
+
+//把刺激材料放进trial内
+<trial redwordstxt>
+	/pretrialpause = 500
+	/validresponse = ("F","J","G","H")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redwordstxt]
+</trial>
+
+ <trial bluewordstxt>
+	/pretrialpause = 500
+	/validresponse = ("F","J","G","H")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = bluewordstxt]
+</trial>
+
+<trial yellowwordstxt>
+	/pretrialpause = 500
+	/validresponse = ("F","J","G","H")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = yellowwordstxt]
+</trial>
+
+<trial greenwordstxt>
+	/pretrialpause = 500
+	/validresponse = ("F","J","G","H")
+	/correctresponse = ("H")
+	/stimulusframes = [1 = greenwordstxt]
+</trial>
+
+
+<trial instruction>
+    /posttrialpause = 2000
+    /validresponse = (" ")
+	/stimulusframes = [1 = instructiontxt]
+</trial>
+
+//把试次放入block
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redwordstxt, greenwordstxt, bluewordstxt, yellowwordstxt)]
+</block>
+
+
+//把block放入expt
+<expt>
+	/ blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
+
