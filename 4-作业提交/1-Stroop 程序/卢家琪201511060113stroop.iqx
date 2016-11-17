@@ -1,0 +1,300 @@
+﻿//定义刺激呈现的内容列表，item定义
+<item instruction>
+	/1 = "请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现一个汉字，请判断汉字的字义与颜色是否一致；如果一致请按“F”键，如果不一致请按“J”键。"
+</item>
+
+<item any>
+	/1 = "如果没有疑问，请按任意键开始实验"
+</item>
+
+<item wordred>
+	/1 = "红"
+</item>
+
+<item wordyellow>
+	/1 = "黄"
+</item>
+
+<item wordblue>
+	/1 = "蓝"
+</item>
+
+<item wordgreen>
+	/1 = "绿"
+</item>
+
+
+//定义刺激呈现的方式，text定义
+
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (240, 248, 255)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+<text anykeytxt>
+	/items = any
+	/vposition = 70 pct
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+
+<text redsame>
+	/items = wordred
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text yellowsame>
+	/items = wordyellow
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text bluesame>
+	/items = wordblue
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text greensame>
+	/items = wordgreen
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text redinyellow>
+	/items = wordred
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text redinblue>
+	/items = wordred
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text redingreen>
+	/items = wordred
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text yellowinred>
+	/items = wordyellow
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text yellowinblue>	
+	/items = wordyellow
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text yellowingreen>
+	/items = wordyellow
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text blueinred>
+	/items = wordblue
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text blueinyellow>
+	/items = wordblue
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text blueingreen>
+	/items = wordblue
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text greeninred>
+	/items = wordgreen
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greeninyellow>
+	/items = wordgreen
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text greeninblue>
+	/items = wordgreen
+	/fontstyle = ("楷体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+
+//定义trials，定义有效的按键反应，正确的按键反应，刺激呈现顺序等信息
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redsame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = redsame]
+</trial>
+
+<trial yellowsame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = yellowsame]
+</trial>
+
+<trial bluesame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = bluesame]
+</trial>
+
+<trial greensame>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = greensame]
+</trial>
+
+<trial redinyellow>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redinyellow]
+</trial>
+
+<trial redinblue>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redinblue]
+</trial>
+
+<trial redingreen>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = redingreen]
+</trial>
+
+<trial yellowinred>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowinred]
+</trial>
+
+<trial yellowinblue>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowinblue]
+</trial>
+
+<trial yellowingreen>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowingreen]
+</trial>
+
+<trial blueinred>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = blueinred]
+</trial>
+
+<trial blueinyellow>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = blueinyellow]
+</trial>
+
+<trial blueingreen>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = blueingreen]
+</trial>
+
+<trial greeninred>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greeninred]
+</trial>
+
+<trial greeninyellow>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greeninyellow]
+</trial>
+
+<trial greeninblue>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = greeninblue]
+</trial>
+
+
+//定义blocks,定义属性信息，加入trails
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block samedifferentblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-20 = noreplace(redsame,yellowsame,bluesame,greensame,redinyellow,redinblue,redingreen,yellowinred,yellowinblue,yellowingreen,blueinred,blueinyellow,blueingreen,greeninred,greeninyellow,greeninblue)]
+</block>
+
+//定义experiment, 加入blocks
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = samedifferentblk]
+</expt>
