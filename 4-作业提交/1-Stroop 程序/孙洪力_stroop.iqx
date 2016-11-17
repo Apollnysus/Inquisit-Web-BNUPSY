@@ -1,0 +1,81 @@
+﻿<item text>
+	/1 = "Red"
+	/2 = "Green"
+	/3 = "Blue"
+</item>
+
+<text red>
+	/items = text
+	/fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text green>
+	/items = text
+	/fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text blue>
+	/items = text
+	/fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text introduction>
+	/items = ("Please respond to the color of the word displayed.
+Press 'r' in response to red.
+Press 'g' in response to green.
+Press 'b' in response to blue.
+If you are ready for the experiment, press any key to start.")
+	/fontstyle = ("Arial",24ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+</text>
+
+<trial introduction>
+	/validresponse = (anyresponse)
+	/recorddata = false
+	/stimulusframes = [1 = introduction]
+</trial>
+
+<trial red>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("R")
+	/stimulusframes = [1 = red]
+</trial>
+
+<trial green>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = green]
+</trial>
+
+<trial blue>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("B")
+	/stimulusframes = [1 = blue]
+</trial>
+
+
+<block introduction>
+	/screencolor = (0,0,0)
+	/trials = [1 = introduction]
+</block>
+
+<block exp>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-9 = noreplace(red,green,blue)]
+</block>
+
+
+<expt>
+	/blocks = [1 = introduction; 2 = exp]
+</expt>
