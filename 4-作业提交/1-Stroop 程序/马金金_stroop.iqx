@@ -1,0 +1,117 @@
+﻿//定义呈现内容item-word
+<item word>
+	/1 = "red"
+	/2 = "blue"
+</item>
+
+//定义刺激呈现形式-text，
+
+<text redcolortxt>
+	/items = word
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text bluecolortxt>
+	/items = word
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+//在这里加入需要反馈给被试的信息，例如是否正确作答，正确的就打一个对号，做错的就打一个错号。
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+//这里增加一个注视点，在每次数字出现之前，让被试集中精力的作用。
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+//在这里增加指导语内容，告知被试任务要求。
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现字体颜色为红色和蓝色的单词，请判断单词的颜色；如果是红色请按“F”键，如果是蓝色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+// 这里增加一个按钮选项，就是看完指导语之后按任意键继续任务。
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+**************************************************************************************************************************************************************************
+增加几个instruction trial 来呈现指导语
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redcolortrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redcolortxt]
+</trial>
+
+<trial bluecolortrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = bluecolortxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+<block redblueblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redcolortrial, bluecolortrial)]
+</block>
+
+//增加instruction block来呈现指导语
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+//先呈现指导语，再呈现主体任务。
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = redblueblk]
+</expt>
+
+**************************************************************************************************************************************************************************

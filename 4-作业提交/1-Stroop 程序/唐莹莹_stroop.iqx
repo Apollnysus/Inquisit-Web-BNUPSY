@@ -1,0 +1,99 @@
+﻿<item colorword>   
+	/1 = "红"
+	/2 = "蓝"
+</item>
+
+<text redword1>
+	/items = colorword
+	/select = 1
+	/txcolor = red
+</text>
+<text redword2>
+	/items = colorword
+	/select = 2
+	/txcolor = red
+</text>
+
+<text blueword1>
+	/items = colorword
+	/select = 1
+	/txcolor = blue
+</text>
+<text blueword2>
+	/items = colorword
+	/select =2
+	/txcolor = blue
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial",3%)
+</text>
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 6%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 6%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text instrutiontxt>
+	/hjustify = left
+	/items = (="请注视十字，屏幕中央会呈现不同颜色的文本，如果文本为红色请按“F”键，如果文本为蓝色请按“J”键。")
+	/size = (640,100)
+	/fontstyle = ("微软雅黑",24pt)
+	/txcolor = (0,255,0)
+	/txbgcolor = (transparent)
+</text>
+<text anykeytxt>
+	/items = (="请按任意键开始实验")
+	/vposition = 70pct
+	/fontstyle = ("微软雅黑",24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1 = instrutiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+<trial redword>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/stimulusframes = [1 = fixation; 100 = noreplace(redword1, redword2)]
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+</trial>
+<trial blueword>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/stimulustimes = [1 = fixation;100 = noreplace(blueword1,blueword2)]
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+</trial>
+
+<block stroopeffect>
+	/screencolor = (255,255,255)
+	/trials = [1-30 = noreplace(redword,blueword)]
+</block>
+<block instrution>
+	/screencolor = (255,255,255)
+	/trials = [1 = instruction]
+</block>
+
+<expt stroopeffect>
+	/ blocks = [1 = instrution; 2 = stroopeffect]
+</expt>
+
+<defaults>
+	/fontstyle = ("微软雅黑",10%)
+	/txcolor = black
+	/txbgcolor = white
+</defaults>
