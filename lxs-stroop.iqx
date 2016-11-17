@@ -1,0 +1,120 @@
+﻿<item red>
+	/1 = "红"
+	/2 = "绿"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "绿"
+</item>
+*********************************************************************************************************************************************************************
+<text redtxt>
+	/items = red
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("在正式实验开始前，请仔细阅读下面的指导语：请将左手和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现一个“红”或“绿”的汉字，你需要判断汉字的颜色，如果是红色请按“F”键，如果是绿色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text anykeytxt>
+	/items = ("请按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text goodbyetxt>
+	/hjustify = center
+	/items = ("实验结束，谢谢您的参与！")
+	/size = (1000,300)
+	/fontstyle = ("宋体",24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+*********************************************************************************************************************************************************************
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redtxt]
+</trial>
+
+<trial greentrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = greentxt]
+</trial>
+
+<trial goodbyetrial>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=goodbyetxt]
+	/recorddata = false
+</trial>
+*********************************************************************************************************************************************************************
+<block colorblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redtrial, greentrial)]
+</block>
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block goodbyeblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = goodbyetrial]
+</block>
+*********************************************************************************************************************************************************************
+<expt>
+	/ blocks = [1 = instructionblk; 2 = colorblk; 3 = goodbyeblk]
+</expt>
