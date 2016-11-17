@@ -1,0 +1,95 @@
+<item red>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "黄"
+	/4 = "蓝"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "黄"
+	/4 = "蓝"
+</item>
+
+<item yellow>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "黄"
+	/4 = "蓝"
+</item>
+
+<item blue>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "黄"
+	/4 = "蓝"
+</item>
+
+<text redtxt>
+	/items = red
+	/ fontstyle = ("宋体",120ptc)
+	/txbgcolor = (255,255,255)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/ fontstyle = ("宋体",120ptc)
+	/txbgcolor = (255,255,255)
+	/txcolor = (0,255,0)
+</text>
+
+<text yellowtxt>
+	/items = yellow
+	/ fontstyle = ("宋体",120ptc)
+	/txbgcolor = (255,255,255)
+	/txcolor = (255,255,0)
+</text>
+
+<text bluetxt>
+	/items = blue
+	/ fontstyle = ("宋体",120ptc)
+	/txbgcolor = (255,255,255)
+	/txcolor = (0,0,255)
+</text>
+
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("S","F","J","L")
+	/correctresponse = ("S")
+	/stimulusframes = [1 = redtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("S","F","J","L")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = greentxt]
+</trial>
+
+<trial yellowtrial>
+	/pretrialpause = 500
+	/validresponse = ("S","F","J","L")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = yellowtxt]
+</trial>
+
+<trial bluetrial>
+	/pretrialpause = 500
+	/validresponse = ("S","F","J","L")
+	/correctresponse = ("L")
+	/stimulusframes = [1 = bluetxt]
+</trial>
+
+<block stroopblk>
+	/screencolor = (255,255,255)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-32 = noreplace(redtrial, greentrial,yellowtrial,bluetrial)]
+</block>
+
+
+<expt>
+	/ blocks = [1 = stroopblk]
+</expt>
