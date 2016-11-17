@@ -1,0 +1,101 @@
+﻿//created by 喻沛诗201511060139
+<item introduction>
+	/1 = "欢迎来到实验，本实验是一个判断字的颜色的实验，在实验中，如果字是红色的，请按D键，如果是黄色，请按F键，如果是蓝色，请按J键，如果是绿色，请按K键，请按D键继续..."
+</item>
+
+<item color>
+	/1 = "红"
+	/2 = "绿"
+	/3 = "蓝"
+	/4 = "黄"
+</item>
+
+//刺激材料性质
+<text redtext>
+	/items = color
+	/txcolor = (255,0,0)
+	/txbgcolor = (0,0,0)
+	/fontstyle = ("Arial",80ptc)
+</text>
+
+<text greentext>
+	/items = color
+	/fontstyle = ("Arial",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text bluetext>
+	/items = color
+	/fontstyle = ("Arial",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text yellowtext>
+	/items = color
+	/fontstyle = ("Arial",80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text introductiontext>
+	/items = introduction
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/fontstyle = ("Arial",50ptc)
+	/size = (1000,300)
+</text>
+
+//判断字的颜色
+<trial redtrail>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = redtext]
+</trial>
+
+<trial greentrail>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = greentext]
+</trial>
+
+<trial bluetrail>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = bluetext]
+</trial>
+
+<trial yellowtrail>
+	/pretrialpause = 500
+	/validresponse = ("D","F","J","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = yellowtext]
+</trial>
+
+<trial introductiontrail>
+	/posttrialpause = 2000
+	/validresponse = ("D")
+	/stimulusframes = [1 = introductiontext]
+</trial>
+
+//将试次放置于block中
+<block introductionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = introductiontrail]
+</block>
+
+<block stroopblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redtrail, greentrail, bluetrail, yellowtrail)]
+</block>
+
+<expt>
+	/ blocks = [1 = introductionblk, stroopblk]
+</expt>
+
+0
