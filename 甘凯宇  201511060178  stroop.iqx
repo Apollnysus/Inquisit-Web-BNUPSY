@@ -1,0 +1,87 @@
+﻿<item colorwords>
+	/1 = "红"
+	/2 = "蓝"
+</item>
+
+<shape rect>
+	/size = (25%,25%)
+	/color = black
+</shape>
+
+<text redwords>
+	/items = colorwords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = white
+	/txcolor = red
+</text>
+
+<text bluewords>
+	/items = colorwords
+	/ fontstyle = ("Arial",60ptc)
+	/txbgcolor = white
+	/txcolor = blue
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 60ptc)
+	/txbgcolor = (transparent)
+	/txcolor = black
+</text>
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将左手和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现汉字，请判断汉字的颜色；如果是红色请按“F”键，如果是蓝色请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = black
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = black
+	/txbgcolor = (transparent)
+</text>
+**************************************************************************************************************************************************************************
+// 现在，我们已经定义好了需要呈现的内容，我们接下来要把需要呈现的内容添加到每个trial里，形成一个完整的试次。对于红色和蓝色，被试的正确反映选项是不一样的，因此，我们需要两个trial来呈现。
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redwordstrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redwords]
+</trial>
+
+<trial bluewordstrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = bluewords]
+</trial>
+
+**************************************************************************************************************************************************************************
+// 现在每个试次都编辑好了，我们可以把试次组织到区组模块当中，方便实验调用,并返回相应的结果值,最终，我们将block 整合到expt模块中，加在到整个实验当中。
+
+<block redblueblk>
+	/screencolor = white
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redwordstrial, bluewordstrial)]
+</block>
+
+<block instructionblk>
+	/screencolor = white
+	/trials = [1 = instruction]
+</block>
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = redblueblk]
+</expt>
