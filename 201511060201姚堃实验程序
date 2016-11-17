@@ -1,0 +1,65 @@
+<item colorstyle>
+/1="红"
+/2="绿"
+/3="蓝"
+/4="黄"
+/5="黑"
+/6="白"
+</item>
+<text redtxt>
+/ items = colorstyle
+/ hjustify = center
+/ fontstyle = ("宋体",48pt)
+/ txbgcolor = (transparent)
+/ txcolor = (255,0,0)
+</text>
+<text  greentxt>
+/ items = colorstyle
+/ hjustify = center
+/ fontstyle = ("宋体",48pt)
+/ txbgcolor = (transparent)
+/ txcolor = (0,255,0)
+</text>
+<text instructiontxt>
+/ hjustify = center
+/ items = ("请将左手和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现有关颜色的词；如果这个词的颜色是红色请按“F”键，如果是绿色请按“J”键，如果没有问题请按任意键开始实验")
+/ size = (1000,300)
+/ fontstyle = ("宋体",30pt)
+/ txbgcolor = (transparent)
+/ txcolor = (255,255,255)
+</text>
+
+<trial instruction>
+/ validresponse = (anyresponse)
+/ stimulusframes = [1=instructiontxt]
+/ recorddata = false
+</trial>
+<trial redtrial>
+/pretrialpause = 500
+/ validresponse = ("F","J")
+/ correctresponse = ("F")
+/ stimulusframes = [1=redtxt]
+</trial>
+<trial greentrial>
+/pretrialpause = 500
+/ validresponse = ("F","J")
+/ correctresponse = ("J")
+/ stimulusframes = [1=greentxt]
+</trial>
+<block instructionblk>
+/ screencolor = (0,0,0)
+/ trials = [1=instruction]
+</block>
+<block redgreenblk>
+/ screencolor = (0,0,0)
+/ blockfeedback = (meanlatency,correct)
+/ trials = [1-12=noreplace(redtrial,greentrial)]
+</block>
+<expt >
+/ blocks = [1=instructionblk;2=redgreenblk]
+</expt>
+
+
+
+
+
