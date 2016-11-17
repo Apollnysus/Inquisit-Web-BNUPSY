@@ -1,0 +1,60 @@
+﻿//颜色stroop效应，分别呈现字体颜色为红和蓝，字本身为红和蓝的四种组合刺激。
+ //要求被试判断字体颜色，红色按键“F”，蓝色按键“J”。
+
+//定义呈现的条目。
+
+<item red>
+/1="红"
+/2="蓝"
+/3="×"
+</item>
+
+<item blue>
+/1="红"
+/2="蓝"
+/3="×"
+</item>
+
+//定义呈现文字形式
+
+<text redtxt>
+      /items=red
+      /fontstyle=("宋体",100pt)
+      /txbgcolor=(0,0,0)
+      /txcolor=(255,0,0)
+</text>
+
+<text bluetxt>
+     /items=blue
+     /fontstyle=("宋体",100pt)
+     /txbgcolor=(0,0,0)
+     /txcolor=(0,0,255)
+</text>
+
+// 把定义好的内容添加到每一个trial里，对于红色和蓝色，被试的正确反映选项是不一样的，因此，我们需要两个trial来呈现。
+
+<trial redtrial>
+      /pretrialpause=500
+      /validresponse=("F","J")
+      /correctresponse=("F")
+      /stimulusframes=[1=redtxt]
+</trial>
+
+<trial bluetrial>
+       /pretrialpause=500
+       /validresponse=("F","J")
+       /correctresponse=("J")
+       /stimulusframes=[1=bluetxt]
+</trial>
+
+// 把试次trial组织到组块block模块中，并返回相应的结果值，然后将block整合到expt模块中，加在整个实验中。
+
+<block redblueblk>
+      /screencolor=(0,0,0)
+      /blockfeedback=(meanlatency,correct)
+      /trials=[1-16=noreplace(redtrial,bluetrial)]
+</block>
+
+<expt>
+/blocks=[1=redblueblk]
+</expt>
