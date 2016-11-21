@@ -1,0 +1,119 @@
+	<item instruction>
+	/1 = "在屏幕中央将会随机呈现红色或绿色的单词；如果单词是红色，请按"F"键，如果单词是绿色，请按"J"键。"
+</item>
+
+
+	<item any>
+	/1 = "请按任意键开始实验"
+</item>
+
+
+	<item words>
+	/1 = "red"
+	/2 = "green"
+</item>
+
+
+
+	<text instructiontxt>
+	/hjustify = center
+	/items = instruction
+	/size = (1000,300)
+	/fontstyle = ("宋体",24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+	<text anykeytxt>
+	/items = any
+	/vposition = 70pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+
+	<text redwordstxt>
+	/items = words
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+
+	<text greenwordstxt>
+	/items = words
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+
+	<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+
+	<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+
+	<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+	<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+
+	<trial redwordstrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redwordstxt]
+</trial>
+
+
+	<trial greenwordstrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = greenwordstxt]
+</trial>
+
+
+	<block redgreenblk>
+	/ screencolor = (0,0,0)
+	/ blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redwordstrial,greenwordstrial)]
+</block>
+
+
+	<block instructionblk>
+	/ screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+	<expt>
+	/blocks = [1 = instructionblk;2 = redgreenblk]
+</expt>

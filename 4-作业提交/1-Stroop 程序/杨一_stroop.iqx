@@ -1,0 +1,142 @@
+我是杨一，
+来自湖北武汉，
+我特别喜欢做手工，
+也喜欢音乐，喜欢唱歌，
+喜欢弹古筝，喜欢汉服，喜欢收藏所有古风的东西~
+可是不喜欢全英文的github界面T-T
+努力探索中...
+
+stroop效应编程
+定义呈现的条目
+======================================================================================================================================================================
+
+
+ 
+ <item word1>
+ 	/1 = “红"
+ 	
+ </item>
+ 
+ 
+ <item word2>
+ 	/1 = "蓝"
+ 	
+ </item>
+
+ <item instruction>
+    /1= "请将手指放到键盘上的F和J键上，若实验时电脑屏幕上呈现的字是红色则按“F”，若呈现的字颜色是蓝色则按“J”请在j刺激呈现之后迅速做出反应。"
+  
+</item>
+ 
+ =====================================================================================================================================================================
+ 
+ 
+ //定义j刺激呈现的方式
+======================================================================================================================================================================
+ <text instructiontxt>
+ 	/items = instruction
+ 	/fontstyle = ("宋体", 4pct)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,255,255)
+ 	/size = (1500,800)
+ 	/hjustify = center
+ </text>
+ 
+
+ <text anykeytxt>
+ 	/items = ("按任意键开始实验")
+ 	/vposition = 70 pct
+ 	/fontstyle = ("宋体", 5pct)
+ 	/txcolor = (255,0,0)
+ 	/txbgcolor = (0,0,0)
+ </text>
+ 
+ //注视点的位置
+ <text fixation>
+ 	/items = ("+")
+ 	/fontstyle = ("Arial", 40ptc)
+ 	/txbgcolor = (transparent)
+ 	/txcolor = (255,255,255)
+ </text>
+ <text different1txt>
+ 	/items = word1
+ 	/fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+ </text>
+ 
+ <text same1txt>
+ 	/items = word1
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,0,0)
+ </text>
+ <text different2txt>
+ 	/items = word2
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,0,0)
+ </text>
+ <text same2txt>
+ 	/items = word2
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (0,0,255)
+ </text>
+ 
+ 
+ ======================================================================================================================================================================
+ <trial instruction>
+ 	/validresponse = (anyresponse)
+ 	/stimulusframes = [1=instructiontxt,anykeytxt]
+ 	/recorddata = false
+ </trial>
+ 
+ <trial same1trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+	/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same1txt]
+ </trial>
+ 
+ <trial same2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same2txt]
+ </trial>
+ 
+ <trial different1trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different1txt]
+ </trial>
+ <trial different2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different2txt]
+ </trial>
+ 
+ //定义blocks
+ ======================================================================================================================================================================
+ <block instructionblk>
+ 	/screencolor = (0,0,0)
+ 	/trials = [1 = instruction]
+ </block>
+ 
+
+ <block stroopblk>
+ 	/screencolor = (0,0,0)
+ 	/blockfeedback = (meanlatency,correct)
+ 	/trials = [1-8 = noreplace(same1trial, same2trial,different1trial,different2trial)]
+ </block>
+ 
+ //定义experiment，加入block
+ ======================================================================================================================================================================
+ <expt>
+ 	/ blocks = [1 = instructionblk; 2 = stroopblk]
+ </expt>
+
+

@@ -1,0 +1,80 @@
+//定义刺激材料内容
+<item word>
+        /1="red"
+        /2="blue"
+</item>
+//定义刺激材料的性质
+<text redwordtxt>
+        /items=word
+        /fontstyle=("Arial",40ptc)
+        /txbgcolor=(0,0,0)
+        /txcolor=(255,0,0)
+</text>
+
+<text bluewordtxt>  
+        /items=word
+        /fontstyle=("Arial".40ptc)
+        /txbgcolor=(0,0,0)
+        /txcolor=(0,0,255)
+</text>
+//定义一个注视点
+<text fixation> 
+        /items=("+")
+        /fontstyle=("Arial",40ptc)
+        /txbgcolor=(transparent)
+        /txcolor=(255,255,255)
+</text>
+//定义指导语
+<text instructiontxt>
+        /hjustify=center
+        /items=("请将左手和右手的食指分别放在键盘的"F"和"J"键上；在屏幕的中央会随机出现一个单词，请判断该单词的颜色；如果是红色，请按"F"键，如果是蓝色，请按"J"键")
+        /size=(1000,300)
+        /fontstyle=("宋体",24pt)
+        /txbgcolor=(transparent)
+        /txcolor=(0,255,0)
+</text>
+//定义一个按钮
+<text anykeytxt> 
+        /items=("按任意键开始实验")
+        /vposition=70pct
+        /fontstyle=("宋体",24pct)
+        /txbgcolor=(transparent)
+        /txcolor=(255,0,0)
+</text>
+//定义指导语出现的位置
+<trial instruction> 
+        /validresponse=(anyresponse)
+        /stimulusframes=[1=instructiontxt,anykeytxt]
+        /recorddata=false
+</trial>
+
+<trial redwordtrial>
+        /pretrialpause=500
+        /validresponse=("F","J")
+        /correctresponse=("F")
+        /stimulusframes=[1=fixation;100=redwordtxt]
+</trial>
+
+<trial bluewordtrial> 
+        /pretrialpause=500 
+        /validresponse=("F","J")
+        /correctresponse=("J")
+        /stimulusframes=[1=fixation;100=bluewordtxt]
+</trial>
+
+<block instructionblk>
+        /screencolor=(0,0,0)
+        /trials=[1=instruction]
+</block>
+
+<block redblueblk>
+        /screencolor=(0,0,0)
+        /blockfeedback=(meanlatency,correct)
+        /trials=[1-48=noreplace(redwordtrial,bluewordtrial)]
+</block>
+
+<expt>
+         /blocks=[1=redblueblk]
+</expt>
+
+        

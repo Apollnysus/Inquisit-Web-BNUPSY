@@ -1,0 +1,127 @@
+//指导语内容
+<item instruction>
+  /1 = "请将左右手食指分别放在键盘的“F”键和“J”键上，屏幕中央会随机出现带颜色的汉字，请判断汉字的颜色，如果是红色请按“F”键，如果是蓝色请按“J”键。"
+
+</item>
+
+//红色的“红”
+<text sameRedtxt>
+  / items = ("红")
+  / fontstyle = ("宋体",60ptc)
+  / txcolor = (255,0,0)
+  / txbgcolor = (0,0,0)
+
+</text>
+
+//蓝色的“红”
+<text differRedtxt>
+  / items = ("红")
+  / fontstyle = ("宋体",60ptc)
+  / txbgcolor = (0,0,0)
+  / txcolor = (0,0,255)
+
+</text>
+
+//蓝色的“蓝”
+<text sameBluetxt>
+   / items = ("蓝")
+   / fontstyle = ("宋体",60ptc)
+   / txbgcolor = (0,0,0)
+   / txcolor = (0,0,255)
+</text>
+
+//红色的“蓝”
+<text differBluetxt>
+   / items = ("蓝")
+   / fontstyle = ("宋体",60ptc)
+   / txbgcolor = (0,0,0)
+   / txcolor = (255,0,0)
+
+</text>
+
+//指导语出现
+<text instructiontxt>
+  / hjustify = center
+  / items = instruction
+  / fontstyle = ("宋体",24ptc)
+  / txcolor = (0,255,0)
+  / txbgcolor = (transparent)
+  / size = (1200,300)
+
+</text>
+
+// 这里增加一个按钮选项，就是看完指导语之后按任意键继续任务。 
+
+ 
+ <text anykeytxt> 
+	/items = ("按任意键开始实验") 
+	/vposition = 70 pct 
+	/fontstyle = ("宋体", 24pt) 
+ 	/txcolor = (255,0,0) 	
+    /txbgcolor = (transparent) 
+ </text> 
+
+//用instruction trial来呈现指导语
+<trial instruction>
+  /validresponse = (anyresponse)
+  /stimulusframes = [1=instructiontxt,anykeytxt]
+  /recorddata = false
+</trial>
+
+//颜色字的四个trial
+<trial sameRedtrial>
+   /pretrialpause = 500
+   /validresponse = ("F","J")
+   /correctresponse = ("F")
+   /stimulusframes = [1= sameRedtxt]
+
+</trial>
+
+<trial differRedtrial>
+   /pretrialpause = 500
+   /validresponse = ("F","J")
+   /correctresponse = ("J")
+   /stimulusframes = [1 = differRedtxt]
+
+</trial>
+
+<trial sameBluetrial>
+   /pretrialpause = 500
+   /validresponse = ("F","J")
+   /correctresponse = ("J")
+   /stimulusframes = [1 = sameBluetxt]
+
+</trial>
+
+<trial differBluetrial>
+   /pretrialpause = 500
+   /validresponse = ("F","J")
+   /correctresponse = ("F")
+   / stimulusframes = [1 = differBluetxt]
+
+</trial>
+
+//两个block
+<block stroopblk>
+  /screencolor = (0,0,0)
+  /blockfeedback = (meanlatency,correct)
+  /trials = [1-16 = noreplace(sameRedtrial,differRedtrial,sameBluetrial,differBluetrial)]
+</block>
+
+<block instructionblk>
+  /screencolor = (0,0,0)
+  /trials = [1 = instruction]
+
+</block>
+
+
+
+//先呈现指导语，再呈现主体任务
+<expt >
+    / blocks = [1 = instructionblk; 2 = stroopblk]
+</expt>
+
+
+
+
+

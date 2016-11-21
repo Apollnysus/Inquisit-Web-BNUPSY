@@ -1,0 +1,481 @@
+﻿*** STROOP TASK WITH KEYBOARD INPUT***
+
+<defaults>
+/minimumversion = "4.0.6.0"
+/canvasaspectratio = (4,3)
+/ screencolor = white
+/ fontstyle = ("Arial", 6.00%, true, false, false, false, 5, 1)
+/ txbgcolor = white
+/ txcolor = black
+/ inputdevice = keyboard
+</defaults>
+
+*** DATA *****
+
+***********
+raw data
+***********
+
+build:									Inquisit build
+date, time, subject, group:				date and time script was run with the current subject/groupnumber 
+blockcode, blocknum:					the name and number of the current block
+trialcode, trialnum: 					the name and number of the currently recorded trial
+											(Note: not all trials that are run might record data) 
+/congruencey:							1 = congruent; 2 = incongruent; 3 = control 
+stimulusitem:							the presented stimuli in order of trial presentation
+response:								the participant's response
+correct:								the correctness of the response (1 = correct; 0 = incorrect)
+latency: 								the response latency (in ms)
+/ congruentlatency:						mean latency of all congruent trials
+/ incongruentlatency:					mean latency of all incongruent trials
+/ controllatency:						mean latency of control trials
+/ meanRTcorr_congruent:					mean latency of all correct congruent trials
+/ meanRTcorr_incongruent:				mean latency of all correct incongruent trials
+/ meanRtcorr_control:					mean latency of all correct control trials
+/ congruentcorrect:						percent correct of all congruent trials
+/ incongruentcorrect:					percent correct of all incongruent trials
+/ controlcorrect:						percent correct of all control trials
+
+<data> 
+/file = "StroopWithControlKeyboard_raw.iqdat"
+/separatefiles = true
+/ columns = [build date time subject blockcode blocknum trialcode trialnum values.congruency stimulusitem 
+			response correct latency 
+			expressions.congruentlatency expressions.incongruentlatency expressions.controllatency 
+			expressions.meanRTcorr_congruent expressions.meanRTcorr_incongruent expressions.meanRTcorr_control
+			expressions.congruentcorrect expressions.incongruentcorrect expressions.controlcorrect]
+</data>
+
+
+**********
+summary data
+**********
+script.startdate:				date script was run
+script.starttime:				time script was started
+script.subjectid:				subject id number
+script.groupid:					group id number
+script.elapsedtime:				time it took to run script (in ms)
+/completed:						0 = script was not completed (prematurely aborted); 1 = script was completed (all conditions run)
+
+/count_congruent:						counts all congruent trials
+/count_incongruent:						counts all incongruent trials
+/count_control:							counts all control trials
+/countcorrect_congruent:				counts all congruent trials with a correct response
+/countcorrect_incongruent:				count all incongruent trials with a correct response
+/countcorrect_control:					count all control trials with a correct response
+
+/ congruentlatency:						mean latency of all congruent trials
+/ incongruentlatency:					mean latency of all incongruent trials
+/ controllatency:						mean latency of control trials
+/meanRTcorr_congruent:					mean latency of all correct congruent trials
+/meanRTcorr_incongruent:				mean latency of all correct incongruent trials
+/meanRtcorr_control:					mean latency of all correct control trials
+/ congruentcorrect:						percent correct of all congruent trials
+/ incongruentcorrect:					percent correct of all incongruent trials
+/ controlcorrect:						percent correct of all control trials
+
+<summarydata >
+/file = "StroopwithCtrlKeyboard_summary.iqdat"
+/columns = [script.startdate, script.starttime, script.subjectid, script.groupid, script.elapsedtime, values.completed,
+			values.count_congruent, values.count_incongruent, values.count_control,
+			values.countcorrect_congruent, values.countcorrect_incongruent, values.countcorrect_control,
+			expressions.congruentlatency expressions.incongruentlatency expressions.controllatency,
+			expressions.meanRTcorr_congruent, expressions.meanRTcorr_incongruent, expressions.meanRTcorr_control,
+			expressions.congruentcorrect expressions.incongruentcorrect expressions.controlcorrect]
+</summarydata>
+
+
+***VALUES: automatically updated***
+
+/completed:				0 = script was not completed (script prematurely aborted); 1 = script was completed (all conditions run)
+/congruencey:			1 = congruent; 2 = incongruent; 3 = control 
+
+<values>
+/completed = 0
+/congruency = 0
+</values>
+
+/count_congruent:					counts all congruent trials
+/countcorrect_congruent:			counts all congruent trials with a correct response
+/sumrt_congruent:					sums up the latencies of correct congruent trials
+/count_incongruent:					counts all incongruent trials
+/countcorrect_incongruent:			count all incongruent trials with a correct response
+/sumrt_incongruent:					sums up the latencies of correct incongruent trials
+/count_control:						counts all control trials
+/countcorrect_control:				count all control trials with a correct response
+/sumrt_control:						sums up the latencies of correct control trials
+
+<values>
+/count_congruent = 0
+/countcorrect_congruent = 0
+/sumrt_congruent = 0
+/count_incongruent = 0
+/countcorrect_incongruent = 0
+/sumrt_incongruent = 0
+/count_control = 0
+/countcorrect_control = 0
+/sumrt_control = 0
+</values>
+
+*** EXPRESSIONS***
+
+/ congruentlatency:						mean latency of all congruent trials
+/ incongruentlatency:					mean latency of all incongruent trials
+/ controllatency:						mean latency of control trials
+
+/meanRTcorr_congruent:					mean latency of all correct congruent trials
+/meanRTcorr_incongruent:				mean latency of all correct incongruent trials
+/meanRtcorr_control:					mean latency of all correct control trials
+
+/ congruentcorrect:						percent correct of all congruent trials
+/ incongruentcorrect:					percent correct of all incongruent trials
+/ controlcorrect:						percent correct of all control trials
+
+<expressions>
+/ congruentlatency = meanlatency(trial.bluecongruent, trial.redcongruent, trial.greencongruent, trial.blackcongruent)
+/ incongruentlatency = meanlatency(trial.blueincongruent, trial.redincongruent, trial.greenincongruent, trial.blackincongruent)
+/ controllatency = meanlatency(trial.bluecontrol, trial.redcontrol, trial.greencontrol, trial.blackcontrol)
+
+/meanRTcorr_congruent = values.sumrt_congruent/values.countcorrect_congruent
+/meanRTcorr_incongruent = values.sumrt_incongruent/values.countcorrect_incongruent
+/meanRtcorr_control = values.sumrt_control/values.countcorrect_control
+
+/ congruentcorrect = percentcorrect(trial.bluecongruent, trial.redcongruent, trial.greencongruent, trial.blackcongruent)
+/ incongruentcorrect = percentcorrect(trial.blueincongruent, trial.redincongruent, trial.greenincongruent, trial.blackincongruent)
+/ controlcorrect = percentcorrect(trial.bluecontrol, trial.redcontrol, trial.greencontrol, trial.blackcontrol)
+</expressions>
+
+
+*** INSTRUCTION PAGES *****
+<page demo>
+^测试
+</page>
+
+<page stroop>
+^在接下来的实验中，你将会看到以不同颜色呈现的代表颜色的汉字。
+^^你需要辨别颜色的呈现颜色，并忽略这些汉字的含义。
+
+^^每个颜色对应的按键如下：
+
+^-- d    —    红 
+^-- f    —    绿
+^-- j    —    蓝
+^-- k    —    黑 
+
+^^例如：如果你看见了这样一个绿色汉字“红” ， 你需要按下 f 键，因为这个字的呈现颜色是绿色。
+
+^^请尽量又快又准确地作出反应。
+^^如果您的反应错误会有X的提示，请不要理会并迅速进行下一个实验。
+</page>
+
+
+<page end>
+^实验结束了，感谢你的参与！
+</page>
+
+<instruct>
+/windowsize = (90%, 90%)
+/nextkey=(" ")
+/nextlabel = "空格键"
+/finishlabel = "空格键"
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 1)
+/ txcolor = (0, 0, 0)
+</instruct>
+
+
+
+*** TEXTS AND TARGETS *****
+
+<text x>
+/ items = ("X")
+/ position = (50, 60)
+/ fontstyle = ("Arial", 7%, true, false, false, false, 5, 0)
+/ color = red
+</text>
+
+<text target>
+/ items = ("*")
+/ color = white
+</text>
+
+<text redreminder>
+/ items = ("d = 红")
+/ position = (20%, 20%)
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 0)
+/ erase = false
+/ txcolor = darkgray
+</text>
+
+<text greenreminder>
+/ items = ("f = 绿")
+/ position = (40%, 20%)
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 0)
+/ erase = false
+/ txcolor = darkgray
+</text>
+
+<text bluereminder>
+/ items = ("j = 蓝")
+/ position = (60%, 20%)
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 0)
+/ erase = false
+/ txcolor = darkgray
+</text>
+
+<text blackreminder>
+/ items = ("k = 黑")
+/ position = (80%, 20%)
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 0)
+/ erase = false
+/ txcolor = darkgray
+</text>
+
+<text redincongruent>
+/ items = ("绿", "蓝", "黑")
+/ color = red
+</text>
+
+<text redcongruent>
+/ items = ("红")
+/ color = red
+</text>
+
+<text redcontrol>
+/ items = ("绿", "蓝", "黑")
+/ color = red
+/ txbgcolor = red
+</text>
+
+<text blueincongruent>
+/ items = ("绿", "红", "黑")
+/ color = blue
+</text>
+
+<text bluecongruent>
+/ items = ("蓝")
+/ color = blue
+</text>
+
+<text bluecontrol>
+/ items = ("绿", "红", "黑")
+/ color = blue
+/ txbgcolor = blue
+</text>
+
+<text greenincongruent>
+/ items = ("蓝", "红", "黑")
+/ color = green
+</text>
+
+<text greencongruent>
+/ items = ("绿")
+/ color = green
+</text>
+
+<text greencontrol>
+/ items = ("蓝", "红", "黑")
+/ color = green
+/ txbgcolor = green
+</text>
+
+<text blackincongruent>
+/ items = ("蓝", "红", "绿")
+/ color = black
+</text>
+
+<text blackcongruent>
+/ items = ("黑")
+/ color = black
+</text>
+
+<text blackcontrol>
+/ items = ("蓝", "红", "绿")
+/ color = black
+/ txbgcolor = black
+</text>
+
+<text ready>
+/items=("按空格键继续")
+/color = (100,100,100)
+/txbgcolor = (transparent)
+/size = (400, 200)
+/ fontstyle = ("Arial", 3%, true, false, false, false, 5, 1)
+</text>
+
+
+*** TRIALS *****
+
+
+<trial redcongruent> 
+/ontrialbegin = [values.count_congruent += 1]
+/ontrialbegin = [values.congruency = 1]
+/ pretrialpause = 200
+/ stimulustimes = [1=redcongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("d")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.redcongruent.correct) {values.countcorrect_congruent += 1; values.sumrt_congruent += trial.redcongruent.latency}]
+</trial>
+
+<trial redincongruent> 
+/ontrialbegin = [values.count_incongruent += 1]
+/ontrialbegin = [values.congruency = 2]
+/ pretrialpause = 200
+/ stimulustimes = [1=redincongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("d")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.redincongruent.correct) {values.countcorrect_incongruent += 1; values.sumrt_incongruent += trial.redincongruent.latency}]
+</trial>
+
+<trial redcontrol> 
+/ontrialbegin = [values.count_control += 1]
+/ontrialbegin = [values.congruency = 3]
+/ pretrialpause = 200
+/ stimulustimes = [1=redcontrol, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("d")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.redcontrol.correct) {values.countcorrect_control += 1; values.sumrt_control += trial.redcontrol.latency}]
+</trial>
+
+<trial greencongruent> 
+/ontrialbegin = [values.count_congruent += 1]
+/ontrialbegin = [values.congruency = 1]
+/ pretrialpause = 200
+/ stimulustimes = [1=greencongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("f")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.greencongruent.correct) {values.countcorrect_congruent += 1; values.sumrt_congruent += trial.greencongruent.latency}]
+</trial>
+
+<trial greenincongruent> 
+/ontrialbegin = [values.count_incongruent += 1]
+/ontrialbegin = [values.congruency = 2]
+/ pretrialpause = 200
+/ stimulustimes = [1=greenincongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("f")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.greenincongruent.correct) {values.countcorrect_incongruent += 1; values.sumrt_incongruent += trial.greenincongruent.latency}]
+</trial>
+
+<trial greencontrol> 
+/ontrialbegin = [values.count_control += 1]
+/ontrialbegin = [values.congruency = 3]
+/ pretrialpause = 200
+/ stimulustimes = [1=greencontrol, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("f")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.greencontrol.correct) {values.countcorrect_control += 1; values.sumrt_control += trial.greencontrol.latency}]
+</trial>
+
+<trial bluecongruent> 
+/ontrialbegin = [values.count_congruent += 1]
+/ontrialbegin = [values.congruency = 1]
+/ pretrialpause = 200
+/ stimulustimes = [1=bluecongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("j")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.bluecongruent.correct) {values.countcorrect_congruent += 1; values.sumrt_congruent += trial.bluecongruent.latency}]
+</trial>
+
+<trial blueincongruent> 
+/ontrialbegin = [values.count_incongruent += 1]
+/ontrialbegin = [values.congruency = 2]
+/ pretrialpause = 200
+/ stimulustimes = [1=blueincongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("j")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.blueincongruent.correct) {values.countcorrect_incongruent += 1; values.sumrt_incongruent += trial.blueincongruent.latency}]
+</trial>
+
+<trial bluecontrol> 
+/ontrialbegin = [values.count_control += 1]
+/ontrialbegin = [values.congruency = 3]
+/ pretrialpause = 200
+/ stimulustimes = [1=bluecontrol, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("j")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.bluecontrol.correct) {values.countcorrect_control += 1; values.sumrt_control += trial.bluecontrol.latency}]
+</trial>
+
+<trial blackcongruent> 
+/ontrialbegin = [values.count_congruent += 1]
+/ontrialbegin = [values.congruency = 1]
+/ pretrialpause = 200
+/ stimulustimes = [1=blackcongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("k")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.blackcongruent.correct) {values.countcorrect_congruent += 1; values.sumrt_congruent += trial.blackcongruent.latency}]
+</trial>
+
+<trial blackincongruent> 
+/ontrialbegin = [values.count_incongruent += 1]
+/ontrialbegin = [values.congruency = 2]
+/ pretrialpause = 200
+/ stimulustimes = [1=blackincongruent, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("k")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.blackincongruent.correct) {values.countcorrect_incongruent += 1; values.sumrt_incongruent += trial.blackincongruent.latency}]
+</trial>
+
+<trial blackcontrol> 
+/ontrialbegin = [values.count_control += 1]
+/ontrialbegin = [values.congruency = 3]
+/ pretrialpause = 200
+/ stimulustimes = [1=blackcontrol, redreminder, greenreminder, bluereminder, blackreminder]
+/ correctresponse = ("k")
+/ validresponse = ("d", "f", "j", "k")
+/ errormessage = true(x, 400)
+/ontrialend = [if (trial.blackcontrol.correct) {values.countcorrect_control += 1; values.sumrt_control += trial.blackcontrol.latency}]
+</trial>
+
+
+***********************************************
+Remaining trials
+***********************************************
+
+<trial ready>
+/stimulustimes = [0=ready]
+/correctresponse = (" ")
+/inputdevice = keyboard
+/recorddata = false
+</trial>
+
+
+
+*** BLOCKS *****
+
+
+<block stroop>
+/preinstructions = (stroop)
+/onblockbegin = [values.count_congruent = 0; values.count_control = 0; values.count_incongruent = 0;
+values.countcorrect_congruent = 0; values.countcorrect_control = 0; values.countcorrect_incongruent = 0;
+values.sumrt_congruent = 0; values.sumrt_control = 0; values.sumrt_incongruent = 0]
+/ trials = [1=ready; 2-85 =noreplace(redcongruent, redincongruent, redcontrol, greencongruent, greenincongruent, greencontrol, bluecongruent, blueincongruent, bluecontrol, blackcongruent, blackincongruent, blackcontrol)]
+</block>
+
+
+
+*** EXPERIMENT***
+
+
+<expt>
+/preinstructions = (demo)
+/postinstructions = (end)
+/ blocks = [1=stroop]
+/onexptend = [values.completed = 1]
+</expt>
+
+
+
+*** End of File*****
+

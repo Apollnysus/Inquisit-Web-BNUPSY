@@ -1,0 +1,123 @@
+//定义呈现刺激的内容条目，定义items
+	<item instruction>
+	/1 = "请将左手和右手的食指分别放在键盘上的"F"键和"J"键上；在屏幕中央将会随机呈现红色和绿色的英文单词；请注意单词的颜色，如果是红色，情按"F"键，如果是绿色，情按"J"键。"
+</item>
+
+
+	<item any>
+	/1 = "请按任意键开始实验"
+</item>
+
+
+	<item words>
+	/1 = "red"
+	/2 = "green"
+</item>
+
+
+
+	<text instructiontxt>
+	/hjustify = center
+	/items = instruction
+	/size = (1000,300)
+	/fontstyle = ("宋体",24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+	<text anykeytxt>
+	/items = any
+	/vposition = 70pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+
+	<text redwordstxt>
+	/items = words
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+
+	<text greenwordstxt>
+	/items = words
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+
+	<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+
+	<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+
+	<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+
+	<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+
+	<trial redwordstrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100 = redwordstxt]
+</trial>
+
+
+	<trial greenwordstrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100 = greenwordstxt]
+</trial>
+
+
+// define blocks
+	<block redgreenblk>
+	/ screencolor = (0,0,0)
+	/ blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(redwordstrial,greenwordstrial)]
+</block>
+
+
+	<block instructionblk>
+	/ screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+//define experiment
+	<expt>
+	/blocks = [1 = instructionblk;2 = redgreenblk]
+</expt>

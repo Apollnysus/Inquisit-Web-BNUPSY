@@ -1,0 +1,304 @@
+﻿// 在上个部分，我们已经完成了基本的编程操作，但是我们明显的能感觉到，现在的实验还非常不完整，因为没有正确和错误的判断，没有注视点，那么在这个模块中，我们就学习加入注视点和正误判断。
+
+
+
+// item定义，在上一个文件的基础上，加入correctmsg, errormsg
+======================================================================================================================================================================
+<item instruction>
+	/1 = "请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现1个字，请判断该字的字意与颜色是否一致；如果一致请按“F”键，如果不一致请按“J”键。"
+</item>
+
+
+<item key>
+	/1 = "如果对指导语没有疑问,请按任意键开始实验"
+</item>
+
+<item colorwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "绿"
+</item>
+
+<item correctmsg>
+	/1 = "√"
+</item>
+
+<item errormsg>
+	/1 = "×"
+</item>
+
+<item fixation>
+	/1 = "+"
+</item>
+
+
+=====================================================================================================================================================================
+
+
+//text定义，在已有文件的基础上，加入注视点，正误判断结果显示的格式
+======================================================================================================================================================================
+<text instructiontxt>
+	/items = instruction
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (240, 248, 255)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+
+<text anykeytxt>
+	/items = key
+	/vposition = 70 pct
+	/fontstyle = ("楷体", 2.76%, true, false, false, false, 5, 1)
+	/txcolor = (255, 0, 0)
+	/txbgcolor = (0,0,0)
+</text>
+
+
+<text redsame>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text yellowsame>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 255, 0)
+</text>
+
+<text greensame>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text redwithyellow>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 255, 0)
+</text>
+
+<text redwithgreen>
+	/items = colorwords
+	/select = 1
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text yellowwithred>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text yellowwithgreen>
+	/items = colorwords
+	/select = 2
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0, 128, 0)
+</text>
+
+<text greenwithred>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 0, 0)
+</text>
+
+<text greenwithyellow>
+	/items = colorwords
+	/select = 3
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255, 255, 0)
+</text>
+
+<text fixation>
+	/items = fixation
+	/select = 1
+	/fontstyle = ("Arial", 80ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text correctmsg>
+	/items = correctmsg
+	/select = 1
+	/fontstyle = ("楷体", 60ptc, false, false, false, false, 5, 1)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0, 0, 0)
+</text>
+
+<text errormsg>
+	/items = errormsg
+	/select = 1
+	/fontstyle = ("楷体", 60ptc, false, false, false, false, 5, 1)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0, 0, 0)
+</text>
+
+
+//定义values & expressions，让我们的注视点呈现时间任性起来。
+======================================================================================================================================================================
+<values>
+	/fixationtime = 0
+</values>
+
+<expressions>
+	/generaterandom = ceil(rand(400,600))
+</expressions>
+
+
+//定义trials，我们需要定义两类trial，共9个trial，因为对于颜色一致的词，我们的正确反应键定位F；对于颜色不一致的词，我们的正确反应键定义为F。另外，还有一个是指导语的trial
+======================================================================================================================================================================
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulustimes = [1=instructiontxt, anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redsamet>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redsamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redsamet.insertstimulustime(text.redsame,values.fixationtime)]
+	/ontrialend = [trial.redsamet.clearstimulusframes()]
+</trial>
+
+<trial yellowsamet>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowsamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowsamet.insertstimulustime(text.yellowsame,values.fixationtime)]
+	/ontrialend = [trial.yellowsamet.clearstimulusframes()]
+</trial>
+
+<trial greensamet>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greensamet.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greensamet.insertstimulustime(text.greensame,values.fixationtime)]
+	/ontrialend = [trial.greensamet.clearstimulusframes()]
+</trial>
+
+<trial redwithyellowt>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redwithyellowt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redwithyellowt.insertstimulustime(text.redwithyellow,values.fixationtime)]
+	/ontrialend = [trial.redwithyellowt.clearstimulusframes()]
+</trial>
+
+<trial redwithgreent>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.redwithgreent.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.redwithgreent.insertstimulustime(text.redwithgreen,values.fixationtime)]
+	/ontrialend = [trial.redwithgreent.clearstimulusframes()]
+</trial>
+
+<trial yellowwithredt>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowwithredt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowwithredt.insertstimulustime(text.yellowwithred,values.fixationtime)]
+	/ontrialend = [trial.yellowwithredt.clearstimulusframes()]
+</trial>
+
+<trial yellowwithgreent>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.yellowwithgreent.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.yellowwithgreent.insertstimulustime(text.yellowwithgreen,values.fixationtime)]
+	/ontrialend = [trial.yellowwithgreent.clearstimulusframes()]
+</trial>
+
+<trial greenwithredt>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greenwithredt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greenwithredt.insertstimulustime(text.greenwithred,values.fixationtime)]
+	/ontrialend = [trial.greenwithredt.clearstimulusframes()]
+</trial>
+
+<trial greenwithyellowt>
+	/pretrialpause = 500
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/ontrialbegin = [values.fixationtime = expressions.generaterandom]
+	/ontrialbegin = [trial.greenwithyellowt.insertstimulustime(text.fixation, 0)]
+	/ontrialbegin = [trial.greenwithyellowt.insertstimulustime(text.greenwithyellow,values.fixationtime)]
+	/ontrialend = [trial.greenwithyellowt.clearstimulusframes()]
+</trial>
+
+//定义blocks,我们在这里定义两个block，并在block里添加trials
+======================================================================================================================================================================
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block colorjudgeblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-18 = noreplacenorepeat(redsamet, yellowsamet, greensamet, redwithyellowt, redwithgreent, yellowwithredt, yellowwithgreent, greenwithredt, greenwithyellowt)]
+</block>
+
+//定义experiment, 加入blocks
+======================================================================================================================================================================
+<expt>
+	/ blocks = [1 = instructionblk; 2 = colorjudgeblk]
+</expt>
+
+

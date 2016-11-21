@@ -1,0 +1,119 @@
+﻿<item instruction>
+	/1 = "你好，欢迎参加实验；这是一个心理学实验，实验过程中，如果汉字含义和汉字颜色一致，请按f键，否则请按j键。"
+</item>
+
+
+<item any>
+/1= "如果已经准备好，按任意键即可以开始实验。"
+</item>
+
+//2个实验材料：
+<item character1>
+/1= "绿"
+</item>
+
+<item character2>
+/1= "紫"
+</item>
+
+
+
+//定义文字的位置颜色什么的：
+<text instructiontxt>
+ /items = instruction
+ /fontstyle = ("宋体", 6pct)
+ /txbgcolor = (0,0,0)
+ /txcolor = (255,255,255)
+ /size = (1500,800)
+ /hjustify = center
+ </text>
+
+ <text anykeytxt>
+ /items = any
+ /vposition = 10 pct
+ /fontstyle = ("宋体", 10pct)
+ /txcolor = (255,255,255)
+ /txbgcolor = (0,0,0)
+ </text>
+
+
+//注视点
+ <text fixation>
+ 	/items = ("+")
+    /fontstyle = ("Arial", 40ptc)
+ 	/txbgcolor = (transparent)
+ 	/txcolor = (255,255,255)
+ </text>
+
+<text same1txt>
+ 	/items = character1
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (0,255,0)
+ </text>
+
+ <text different2txt>
+ 	/items = character2
+ 	/ fontstyle = ("Arial",60ptc)
+ 	/txbgcolor = (0,0,0)
+ 	/txcolor = (255,0,0)
+ </text>
+
+//这里增加一个注视点，在每次汉字出现之前，让被试集中精力的作用。
+
+<text fixation1>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+
+//定义反应正误：
+
+
+ <trial instruction>
+ 	/validresponse = (anyresponse)
+ 	/stimulusframes = [1=instructiontxt,anykeytxt]
+ 	/recorddata = false
+ </trial>
+ 
+ <trial same1trial>
+	/pretrialpause = 500	/validresponse = ("F","J")
+/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same1txt]
+ </trial>
+ 
+<trial same2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("F")
+ 	/stimulusframes = [1 = fixation;100=same1txt]
+ </trial>
+ 
+ <trial different1trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different2txt]
+ </trial>
+ <trial different2trial>
+ 	/pretrialpause = 500
+ 	/validresponse = ("F","J")
+ 	/correctresponse = ("j")
+ 	/stimulusframes = [1 = fixation;100=different2txt]
+ </trial>
+ 
+
+
+
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+//自我介绍：我叫张书琦。私の名前は张书琦。меня зовут张书琦。tên tôi là张书琦。mon nom est张书琦。Ich heisse张书琦。
+  我叫张书琦。私の名前は张书琦。меня зовут张书琦。tên tôi là张书琦。mon nom est张书琦。Ich heisse张书琦。
+  我叫张书琦。私の名前は张书琦。меня зовут张书琦。tên tôi là张书琦。mon nom est张书琦。Ich heisse张书琦。
+  我叫张书琦。私の名前は张书琦。меня зовут张书琦。tên tôi là张书琦。mon nom est张书琦。Ich heisse张书琦。

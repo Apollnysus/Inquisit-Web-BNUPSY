@@ -1,0 +1,111 @@
+﻿<item colorwords>
+  /1 = "红"
+  /2 = "蓝"
+</item>
+
+<item instruction>
+  /1="请将左数和右手的食指分别放在键盘的“F”键和“J”键上；
+在屏幕的中央会随机出现红色或蓝色汉字；
+请注意字体颜色，如果是红色，请按“F”键，如果是蓝色，请按“J”键"
+  </item>
+//写item的作用就相当于写一个列表，让后面写text属性可以调用，调用就很像那eprime里面的[]调用。
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text instruction>
+  /items = instruction
+  /fontstyle=("宋体",40pt)
+  /txbgcolor=(0,0,0)
+  /txcolor=(255,255,255)
+  /hjustify = center
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+//transparent是什么意思
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+</text>
+
+//pct应该是percent吧
+
+<text bluetxt>
+  /items = colorwords
+  /fontstyle=("宋体",70ptc)
+  /size = (50,50)
+  /txcolor = (0,0,255)
+  /txbgcolor = (0,0,0)
+</text>
+
+<text redtxt>
+  /items = colorwords
+  /fontstyle = ("宋体",70ptc)
+  /size =(50,50)
+  /txcolor = (255,0,0)
+  /txbgcolor = (0,0,0)
+</text>
+
+//text部分到此结束，接下来我们写trial调用text
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulustimes = [1=instruction,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial bluetrial>
+  /correctmessage = (correctmsg,500)
+  /errormessage = (errormsg,500)
+  /validresponse = ("F","J")
+  /correctresponse = ("J")
+  /pretrialpause = 500
+  /stimulustimes = [1 = fixation; 500 = bluetxt]
+</trial>
+
+<trial redtrial>
+  /correctmessage = (correctmsg,500)
+  /errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulustimes = [1 = fixation;500 = redtxt]
+</trial>
+
+//trial结束了
+
+<block instructionblk>
+  /screencolor = (0,0,0)
+  /trials = [1 = instruction]
+</block>
+
+<block redblueblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-12 = noreplace(redtrial, bluetrial)]
+</block>
+
+<expt>
+  /blocks = [1=instructionblk;2 = redblueblk]
+</expt>

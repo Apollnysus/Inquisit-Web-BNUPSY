@@ -1,0 +1,51 @@
+
+<item red>
+	/1 = "红"
+	/2 = "绿"
+</item>
+
+<item green>
+	/1 = "红"
+	/2 = "绿"
+</item>
+
+
+<text red>
+	/items = red
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text green>
+	/items = green
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+
+<trial red>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = red]
+</trial>
+
+<trial green>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = green]
+</trial>
+
+<block red>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-16 = noreplace(red,green)]
+</block>
+
+
+<expt>
+	/ blocks = [1 = red]
+</expt>

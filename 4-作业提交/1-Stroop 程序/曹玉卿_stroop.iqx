@@ -1,0 +1,147 @@
+﻿<item colorwords>
+	/1="红"
+	/2="绿"
+	/3="蓝"
+	/4="黄"
+</item>
+
+<shape rect>
+	/size = (25%,25%)
+	/ color = black
+
+</shape>
+<text facilitation1>
+	/items = colorwords
+	/select = 1
+	/txcolor = red
+
+</text>
+<text facilitation2>
+	/items = colorwords
+	/select = 2
+	/txcolor = green
+
+</text>
+<text facilitation3>
+	/items = colorwords
+	/select = 3
+	/txcolor = blue
+
+</text>
+<text facilitation4>
+	/items = colorwords
+	/select = 4
+	/txcolor = yellow
+
+</text>
+<text interference1>
+	/items = colorwords
+	/select = 1
+	/txcolor = green
+
+</text>
+<text interference2>
+	/items = colorwords
+	/select = 2
+	/txcolor = blue
+
+</text>
+<text interference3>
+	/items = colorwords
+	/select = 3
+	/txcolor = yellow
+
+</text>
+<text interference4>
+	/items = colorwords
+	/select = 4
+	/txcolor = red
+
+
+</text>
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial",3%)
+
+</text>
+<text instructiontxt>
+	/hjustify = left
+	/items = (="请注视十字，屏幕中央会呈现不同颜色的文本，请按照文本的颜色对应按键，1为红色，2为绿色，3为蓝色，4为黄色")
+	/size = (640,100)
+	/fontstyle = ("宋体",24pt)
+	/txcolor = (0,255,0)
+	/txbgcolor = (transparent)
+
+</text>
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70pt
+	/fontstyle = ("Arial",24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+
+</text>
+
+<trial instruction>
+	/validresponse = (anyrespone)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+
+</trial>
+<trial red>
+	/stimulustimes = [1=fixation;1500=noreplace(facilitation1,interference4)]
+	/validresponse = ("1","2","3","4")
+	/correctresponse = ("1")
+	
+</trial>
+<trial green>
+	/stimulustimes = [1=fixation;1500=noreplace(facilitation2,interference1)]
+	/validresponse = ("1","2","3","4")
+	/correctresponse = ("2")
+	
+
+</trial>
+<trial blue>
+	/stimulustimes = [1=fixation;1500=noreplace(facilitation3,interference2)]
+	/validresponse = ("1","2","3","4")
+	/correctresponse = ("3")
+	
+
+</trial>
+<trial yellow>
+	/stimulustimes = [1=fixation;1500=noreplace(facilitation4,interference3)]
+	/validresponse = ("1","2","3","4")
+	/correctresponse = ("4")
+	
+
+</trial>
+
+
+
+<block stroopeffect>
+	/screencolor = (0,0,0)
+	/trials = [1-40=noreplace(red,blue,green,yellow)]
+</block>
+
+<block instruction>
+	/screencolor = (0,0,0)
+	/trials = [1=instruction]
+</block>
+<expt stroopeffect>
+	/ blocks = [1=instruction;2=stroopeffect]
+
+</expt>
+<defaults>
+	/fontstyle = ("宋体",10%)
+	/txcolor = white
+	/txbgcolor = black
+</defaults>
+
+
+
+
+
+
+
+
+

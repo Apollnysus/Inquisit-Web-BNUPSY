@@ -1,0 +1,181 @@
+<item instruction>
+	/1 = "欢迎参加我们的实验！
+请注视屏幕中央的“+”注视点，
+接着屏幕中央会呈现不同颜色的文本，
+请用（红、黄、蓝、绿）快速读出文本的颜色。
+四种颜色分别对应键盘上的“D”“F”“J”“K”四个键，
+请集中注意力，又好又快地做出判断。
+
+准备好后，请按任意键开始实验。"
+</item>
+
+<item colorwords>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+
+=================================
+
+<text instructiontxt>
+	/ items = instruction
+	/ fontstyle = ("宋体", 70ptc)
+	/ txcolor = (255,255,255)
+	/ txbgcolor = (0,0,0)
+	/ hjustify = left
+</text>
+
+<text facilitation1>
+	/ items = colorwords
+	/ select = 1
+	/ txcolor = red
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text facilitation2>
+	/ items = colorwords
+	/ select = 2
+	/ txcolor = yellow
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text facilitation3>
+	/ items = colorwords
+	/ select = 3
+	/ txcolor = blue
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text facilitation4>
+	/ items = colorwords
+	/ select = 4
+	/ txcolor = green
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text interference1>
+	/ items = colorwords
+	/ select = 1
+	/ txcolor = yellow
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text interference2>
+	/ items = colorwords
+	/ select = 2
+	/ txcolor = blue
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text interference3>
+	/ items = colorwords
+	/ select = 3
+	/ txcolor = green
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+<text interference4>
+	/ items = colorwords
+	/ select = 4
+	/ txcolor = red
+	/ fontstyle = ("宋体", 100ptc)
+	/ txbgcolor = (0,0,0)
+</text>
+
+===========================
+
+<trial instruction>
+	/ validresponse = (anyresponse)
+	/ stimulusframes = [1 = instructiontxt]
+	/ recorddata = false
+</trial>
+
+<trial facilitation1>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = facilitation1]
+</trial>
+
+<trial facilitation2>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = facilitation2]
+</trial>
+
+<trial facilitation3>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = facilitation3]
+</trial>
+
+<trial facilitation4>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = facilitation4]
+</trial>
+
+<trial interference1>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = interference1]
+</trial>
+
+<trial interference2>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = interference2]
+</trial>
+
+<trial interference3>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("K")
+	/stimulusframes = [1 = interference3]
+</trial>
+
+<trial interference4>
+	/ pretrialpause = 500
+	/ validresponse = ("D","F","J","K")
+	/correctresponse = ("D")
+	/stimulusframes = [1 = interference4]
+</trial>
+
+==========================
+
+<block instruction>
+	/ screencolor = (0,0,0)
+	/ trials = [1 = instruction]
+</block>
+
+<block stroop>
+	/ screencolor = (0,0,0)
+	/ trials = [1-30 = noreplace(facilitation1,facilitation2,facilitation3,facilitation4,interference1,interference2,interference3,interference4)]
+</block>
+
+==========================
+
+<expt stroopeffect>
+	/ blocks = [1 = instruction;2 =stroop]
+</expt>
+
+
+
+
+
+
+
+

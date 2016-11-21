@@ -1,0 +1,137 @@
+﻿ <item instruction>
+/1="请把你的左手和右手的食指和中指放在键盘的“D”键、“F”键、“J”键和“K”键上，待会儿屏幕中央会出现一些英文单词，请判断单词的颜色，如果是红色按“D”键，是蓝色按“F”键，是绿色按“J”键，是橙色按“K”键"
+</item>
+
+<item any>
+/1="请按任意键开始实验"
+</item>
+
+<item colorwords>
+/1="RED"
+/2="BLUE"
+/3="GREEN"
+/4="ORANGE"
+</item>
+
+<item redwords>
+/1="RED"
+/2="BLUE"
+/3="GREEN"
+/4="ORANGE"
+</item>
+
+<item bluewords>
+/1="RED"
+/2="BLUE"
+/3="GREEN"
+/4="ORANGE"
+</item>
+
+<item greenwords>
+/1="RED"
+/2="BLUE"
+/3="GREEN"
+/4="ORANGE"
+</item>
+
+<item orangewords>
+/1="RED"
+/2="BLUE"
+/3="GREEN"
+/4="ORANGE"
+</item>
+
+<text instructiontxt>
+/items=instruction
+/fontstyle = ("宋体", 4pct)
+/txbgcolor = (0,0,0)
+/txcolor = (255,255,255)
+/size = (1366,768)
+/hjustify = center
+</text>
+
+<text anykeytxt>
+/items = any
+/vposition = 70 pct
+/fontstyle = ("宋体", 24pt)
+/txcolor = (255,0,0)
+/txbgcolor = (transparent)
+</text>
+
+<text redwordstxt>
+/items = redwords
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = red
+</text>
+
+<text bluewordstxt>
+/items = bluewords
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = blue
+</text>
+
+<text greenwordstxt>
+/items = greenwords
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = green
+</text>
+
+<text orangewordstxt>
+/items = orangewords
+/fontstyle = ("Arial",60ptc)
+/txbgcolor = (0,0,0)
+/txcolor = orange
+</text>
+
+<trial instruction>
+/validresponse = (anyresponse)
+/stimulusframes = [1=instructiontxt,anykeytxt]
+/recorddata = false
+</trial>
+
+<trial redwordstrial>
+/pretrialpause = 500
+/validresponse = ("D","F","J","K")
+/correctresponse = ("D")
+/stimulusframes = [1 = redwordstxt]
+</trial>
+
+<trial bluewordstrial>
+/pretrialpause = 500
+/validresponse = ("D","F","J","K")
+/correctresponse = ("F")
+/stimulusframes = [1 = bluewordstxt]
+</trial>
+
+<trial greenwordstrial>
+/pretrialpause = 500
+/validresponse = ("D","F","J","K")
+/correctresponse = ("J")
+/stimulusframes = [1 = greenwordstxt]
+</trial>
+
+<trial orangewordstrial>
+/pretrialpause = 500
+/validresponse = ("D","F","J","K")
+/correctresponse = ("K")
+/stimulusframes = [1 = orangewordstxt]
+</trial>
+
+<block instructionblk>
+/screencolor = (0,0,0)
+/trials = [1 = instruction]
+</block>
+
+
+<block redbluegreenorangeblk>
+/screencolor = (0,0,0)
+/blockfeedback = (meanlatency,correct)
+/trials = [1-16 = noreplace(redwordstrial, bluewordstrial,greenwordstrial,orangewordstrial)]
+</block>
+
+<expt>
+/ blocks = [1 = instructionblk; 2 =redbluegreenorangeblk ]
+</expt>

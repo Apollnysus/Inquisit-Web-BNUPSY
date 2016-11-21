@@ -1,0 +1,97 @@
+
+
+
+<item redcolored>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+
+<item bluecolored>
+	/1 = "红"
+	/2 = "黄"
+	/3 = "蓝"
+	/4 = "绿"
+</item>
+
+<text redcoloredtxt>
+	/items = redcolored
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text bluecoloredtxt>
+	/items = bluecolored
+	/fontstyle = ("Arial",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+
+<text fixationtxt>
+	/items = ("+")
+	/fontstyle = ("Arial", 40pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<trial redcoloredtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixationtxt; 100 = redcoloredtxt]
+</trial>
+
+<trial bluecoloredtrial>
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixationtxt; 100 = bluecoloredtxt]
+</trial>
+
+
+<block redblueblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency, correct)
+	/trials = [1-16 = noreplace(redcoloredtrial, bluecoloredtrial)]
+</block>
+
+<item instruction>
+	/1 = "请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现字符，请判断它的颜色；如果是蓝色，请按“F”键；如果是红色请按“J”键。"
+</item>
+
+<text instructiontxt>
+	/items = instruction
+	/vposition = 50 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,255,255)
+	/txbgcolor = (transparent)
+	/size = (1000,300)
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 60 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+<trial instructiontrial>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt, anykeytxt]
+	/recorddata = false
+</trial>
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instructiontrial]
+</block>
+
+
+
+<expt>
+	/blocks = [1=instructionblk; 2=redblueblk]
+</expt>

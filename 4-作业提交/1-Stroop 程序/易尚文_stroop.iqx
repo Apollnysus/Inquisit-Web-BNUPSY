@@ -1,0 +1,132 @@
+﻿//item分为黄色和蓝色的字，每个里有两个attributes
+<item yellow>
+	/1 = "黄"
+	/2 = "蓝"
+</item>
+
+<item blue>
+	/1 = "蓝"
+	/2 = "黄"
+</item>
+
+//指导语、注视点、刺激和反馈材料的 颜色 字体 大小 背景颜色
+<text yellowtxt>
+	/items = yellow
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,0)
+</text>
+
+<text bluetxt>
+	/items = blue
+	/ fontstyle = ("Arial",40ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<text correctmsg>
+	/items = ("√")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (0,255,0)
+</text>
+
+<text errormsg>
+	/items = ("×")
+	/fontstyle = ("Arial", 10%)
+	/txbgcolor = (transparent)
+	/txcolor = (255,0,0)
+</text>
+
+<text fixation>
+	/items = ("+")
+	/fontstyle = ("Arial", 40ptc)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text instructiontxt>
+	/hjustify = center
+	/items = ("请将左数和右手的食指分别放在键盘的“F”键和“J”键上；在屏幕的中央会随机出现有颜色的汉字，请判断汉字的颜色；如果是黄色，请按“F”键，如果是蓝色，请按“J”键。")
+	/size = (1000,300)
+	/fontstyle = ("宋体", 24pt)
+	/txbgcolor = (transparent)
+	/txcolor = (255,255,255)
+</text>
+
+<text anykeytxt>
+	/items = ("按任意键开始实验")
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+**************************************************************************************************************************************************************************
+// 现在，我们已经定义好了需要呈现的内容，我们接下来要把需要呈现的内容添加到指导语和实验trial里，形成一个完整的试次。
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial yellowtrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("F")
+	/stimulusframes = [1 = fixation; 100=yellowtxt]
+</trial>
+
+<trial bluetrial>
+	/correctmessage = (correctmsg,500)
+	/errormessage = (errormsg,500)
+	/pretrialpause = 500
+	/validresponse = ("F","J")
+	/correctresponse = ("J")
+	/stimulusframes = [1 = fixation; 100=bluetxt]
+</trial>
+
+**************************************************************************************************************************************************************************
+// 现在每个试次都编辑好了，我们可以把试次组织到区组模块当中，方便实验调用,并返回相应的结果值,最终，我们将block 整合到expt模块中，加在到整个实验当中。
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+<block yellowblueblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-4 = noreplace(yellowtrial, bluetrial)]
+</block>
+
+
+<expt>
+	/ blocks = [1 = instructionblk; 2 = yellowblueblk]
+</expt>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
