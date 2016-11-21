@@ -1,0 +1,34 @@
+﻿<instruct myinstruct>
+	/nextkey = (" ")
+	/fontstyle = ("楷体_GB2312", 4%, false, false, false, false, 5, 1)
+	/txcolor = (40,17,210)
+	/screencolor = (255,255,255)
+	/lastlabel = "Come on baby!"
+    /nextlabel = "Don't be shy!~~"
+    /prevkey = ("P")
+	/windowsize = (800,500)
+</instruct>
+
+
+
+<page myintroduct>
+   这是一个漂亮的指导语！！
+^^    别玩手机了好好做实验
+^^   ~请按空格键上车~
+</page>
+<page endintroduction>
+请您抓好扶手，不要依靠车门，前方到站是：
+^    北京师范大学,Beijing Normal University
+^^    你以为下一步是让你领被试费吗？
+^^^^        哈哈哈哈哈才没有被试费略略略~~
+</page>
+
+
+<expt>
+   /preinstructions = (myintroduct)
+   /postinstructions = (endintroduction)
+</expt>
+
+
+    
+
