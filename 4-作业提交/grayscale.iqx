@@ -1,0 +1,255 @@
+﻿//created by Jiting Liu 刘继婷 11/29/2016
+//使用不同灰度图片探测被试的差别反应阈限
+
+<item common>
+	/ 1= "0.bmp"
+</item>
+
+<item gray>
+/1="1.bmp"
+/2="2.bmp"
+/3="3.bmp"
+/4="4.bmp"
+/5="5.bmp"
+/6="6.bmp"
+/7="7.bmp"
+/8="8.bmp"
+/9="9.bmp"
+/10="10.bmp"
+/11="11.bmp"
+/12="12.bmp"
+/13="13.bmp"
+/14="14.bmp"
+/15="15.bmp"
+</item>
+
+<item fixation>
+	/1 = "+"
+</item>
+
+<item correctmsg>
+	/1 = "√"
+</item>
+
+<item errormsg>
+	/1 = "×"
+</item>
+
+
+<text instruct>
+	/items =( "您好，欢迎来到神奇的实验室！
+请您尽量准确快速的对我们呈现的刺激材料进行反应！
+接下来您将看到四张图片，请使用鼠标点击与其他三张不同的图片。
+按任意键继续。")
+	/fontstyle = ("楷体", 5%)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0,0,0)
+</text>
+
+<text goodbye>
+	/items = ("实验结束，请呼叫主试。")
+	/fontstyle = ("楷体", 5%)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0,0,0)
+</text>
+
+<picture c1>
+	/items = common
+	/erase = ture(0,0,0)
+	/position = (20pct,20pct)
+	/size = (250,250)
+</picture>
+
+<picture c2>
+	/items = common
+	/erase = ture(0,0,0)
+	/position = (80pct,20pct)
+	/size = (250,250)
+</picture>
+
+<picture c3>
+	/items = common
+	/erase = ture(0,0,0)
+	/position = (20pct,80pct)
+	/size = (250,250)
+</picture>
+
+<picture c4>
+	/items = common
+	/erase = ture(0,0,0)
+	/position = (80pct,80pct)
+	/size = (250,250)
+</picture>
+
+<picture g1>
+	/items = gray
+	/erase = ture(0,0,0)
+	/position = (20pct,20pct)
+	/size = (250,250)
+</picture>
+
+<picture g2>
+	/items = gray
+	/erase = ture(0,0,0)
+	/position = (80pct,20pct)
+	/size = (250,250)
+</picture>
+
+<picture g3>
+	/items = gray
+	/erase = ture(0,0,0)
+	/position = (20pct,80pct)
+	/size = (250,250)
+</picture>
+
+<picture g4>
+	/items = gray
+	/erase = ture(0,0,0)
+	/position = (80pct,80pct)
+	/size = (250,250)
+</picture>
+
+<shape blank>
+	/erase = True(0,0,0)
+	/color = (black)
+	/size = (300,300)
+    /shape = rectangle
+</shape>
+
+<text fixation>
+	/items = fixation
+	/select = 1
+	/fontstyle = ("Arial", 80ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+</text>
+
+<text correctmsg>
+	/items = correctmsg
+	/select = 1
+	/fontstyle = ("楷体", 60ptc, false, false, false, false, 5, 1)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0, 0, 0)
+</text>
+
+<text errormsg>
+	/items = errormsg
+	/select = 1
+	/fontstyle = ("楷体", 60ptc, false, false, false, false, 5, 1)
+	/txcolor = (255,255,255)
+	/txbgcolor = (0, 0, 0)
+</text>
+
+//values & expression
+
+<values>
+	/fixtime = 0
+	/shapetime = 0
+</values>
+
+<expressions>
+	/generaterandomfixation = ceil(rand(400,600))
+	/generaterandomshape = ceil(rand(200,300))
+</expressions>
+
+//定义灰度图片位置不同的四个trial
+<trial one>
+	/ pretrialpause = 500
+	/ correctmessage = (correctmsg,500)
+	/ errormessage = (errormsg,500)
+	/ correctresponse = (g1)
+	/ ontrialbegin = [values.fixtime = expressions.generaterandomfixation]
+	/ ontrialbegin = [values.shapetime = values.fixtime+expressions.generaterandomshape]
+	/ ontrialbegin = [trial.one.insertstimulustime(text.fixation,0)]
+	/ ontrialbegin = [trial.one.insertstimulustime(shape.blank,values.fixtime)]
+	/ ontrialbegin = [trial.one.insertstimulustime(picture.g1,values.shapetime)]
+	/ ontrialbegin = [trial.one.insertstimulustime(picture.c2,values.shapetime)]
+	/ ontrialbegin = [trial.one.insertstimulustime(picture.c3,values.shapetime)]
+	/ ontrialbegin = [trial.one.insertstimulustime(picture.c4,values.shapetime)]
+	/ ontrialend = [trial.one.clearstimulusframes()]
+</trial>
+
+<trial two>
+	/ pretrialpause = 500
+	/ correctmessage = (correctmsg,500)
+	/ errormessage = (errormsg,500)
+	/ correctresponse = (g2)
+	/ ontrialbegin = [values.fixtime = expressions.generaterandomfixation]
+	/ ontrialbegin = [values.shapetime = values.fixtime+expressions.generaterandomshape]
+	/ ontrialbegin = [trial.two.insertstimulustime(text.fixation,0)]
+	/ ontrialbegin = [trial.two.insertstimulustime(shape.blank,values.fixtime)]
+	/ ontrialbegin = [trial.two.insertstimulustime(picture.c1,values.shapetime)]
+	/ ontrialbegin = [trial.two.insertstimulustime(picture.g2,values.shapetime)]
+	/ ontrialbegin = [trial.two.insertstimulustime(picture.c3,values.shapetime)]
+	/ ontrialbegin = [trial.two.insertstimulustime(picture.c4,values.shapetime)]
+	/ ontrialend = [trial.two.clearstimulusframes()]
+</trial>
+
+<trial three>
+	/ pretrialpause = 500
+	/ correctmessage = (correctmsg,500)
+	/ errormessage = (errormsg,500)
+	/ correctresponse = (g3)
+	/ ontrialbegin = [values.fixtime = expressions.generaterandomfixation]
+	/ ontrialbegin = [values.shapetime = values.fixtime+expressions.generaterandomshape]
+	/ ontrialbegin = [trial.three.insertstimulustime(text.fixation,0)]
+	/ ontrialbegin = [trial.three.insertstimulustime(shape.blank,values.fixtime)]
+	/ ontrialbegin = [trial.three.insertstimulustime(picture.c1,values.shapetime)]
+	/ ontrialbegin = [trial.three.insertstimulustime(picture.c2,values.shapetime)]
+	/ ontrialbegin = [trial.three.insertstimulustime(picture.g3,values.shapetime)]
+	/ ontrialbegin = [trial.three.insertstimulustime(picture.c4,values.shapetime)]
+	/ ontrialend = [trial.three.clearstimulusframes()]
+</trial>
+
+<trial four>
+	/ pretrialpause = 500
+	/ correctmessage = (correctmsg,500)
+	/ errormessage = (errormsg,500)
+	/ correctresponse = (g4)
+	/ ontrialbegin = [values.fixtime = expressions.generaterandomfixation]
+	/ ontrialbegin = [values.shapetime = values.fixtime+expressions.generaterandomshape]
+	/ ontrialbegin = [trial.four.insertstimulustime(text.fixation,0)]
+	/ ontrialbegin = [trial.four.insertstimulustime(shape.blank,values.fixtime)]
+	/ ontrialbegin = [trial.four.insertstimulustime(picture.c1,values.shapetime)]
+	/ ontrialbegin = [trial.four.insertstimulustime(picture.c2,values.shapetime)]
+	/ ontrialbegin = [trial.four.insertstimulustime(picture.c3,values.shapetime)]
+	/ ontrialbegin = [trial.four.insertstimulustime(picture.g4,values.shapetime)]
+	/ ontrialend = [trial.four.clearstimulusframes()]
+</trial>
+
+<trial instr>
+	/ stimulusframes = [1=instruct]
+	/ validresponse = (anyresponse)
+	/ recorddata = false
+</trial>
+
+<trial goodbye>
+	/ stimulusframes = [1=goodbye]
+	/ validresponse = (anyresponse)
+</trial>
+
+<block start>
+	/ screencolor = (0,0,0)
+	/ trials =[1=instr]
+</block>
+
+<block goodbye>
+	/ screencolor = (0,0,0)
+	/ trials =[1=goodbye]
+</block>
+
+<block grayscale>
+	/ screencolor = (0,0,0)
+	/ blockfeedback = (correct)
+	/ recorddata = true
+	/ trials = [1-16= noreplacenorepeat(one,two,three,four)]
+</block>
+
+<expt grayscale>
+	/ blocks = [1=start;2=grayscale;3=goodbye]
+</expt>
+
+<defaults>
+	/ inputdevice = mouse
+    /validresponse = (lbuttondown)
+</defaults>
